@@ -1,0 +1,34 @@
+<template name="Write_Letter">
+  <br>
+  <div class="row">
+    <div class="col-md-5">
+      <h4 class="teal">Step 1 - Client Info</h4>
+      <select class="input_material auth" name="engagement_type">
+        <option value="0">-- Choose a Client --</option>
+        <option value="1">Client 1</option>
+        <option value="0">Client 2</option>
+        <option value="0">Client 3</option>
+      </select>
+      <h4 class="teal">- or Add a New Client-</h4>
+      <input type="text" name="name" placeholder="Company Name" class="input_material auth">
+      <input type="text" name="address" placeholder="Company Address" class="input_material auth">
+      <input type="number" name="phone" placeholder="Company Phone" class="input_material auth">
+      <input type="text" name="client_name" placeholder="Client Name" class="input_material auth">
+      <input type="email" name="client_email" placeholder="Client Email" class="input_material auth">
+    </div>
+
+    <div class="col-md-7">
+      <h4 class="teal">Step 2 - Engagement</h4>
+      <select class="input_material auth" name="engagement_type">
+        <option value="0">Type 1</option>
+        <option value="1">Type 2</option>
+        <option value="0">Type 3</option>
+      </select>
+      <br>
+      <textarea name="engagement" class="input_material area" rows="8" cols="80" placeholder="Write the Engagement Letter"></textarea>
+      <br>
+      <a href="/new_letter/step_2" class="btn btn-white signup" name="next">Next</a>
+    </div>
+  </div>
+  <br>
+</template>

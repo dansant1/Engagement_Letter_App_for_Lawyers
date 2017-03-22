@@ -1,0 +1,73 @@
+<template name="Lawyer_Rates">
+  <br>
+  <div class="row">
+    <div class="col-md-6">
+      <h4 class="teal">Step 4 - Assign Lawyer</h4>
+      <select style="border-radius: 0px" class="input_material auth" name="engagement_type">
+        <option value="0">-- Type of Charge --</option>
+        <option value="1">Retainer</option>
+        <option value="0">Recurring</option>
+      </select>
+
+      <select style="border-radius: 0px" class="input_material auth" name="engagement_type">
+        <option value="0">Lawyer 1</option>
+        <option value="1">Lawyer 2</option>
+        <option value="0">Lawyer 3</option>
+      </select>
+      <input type="number" name="amount" placeholder="Amount" class="input_material auth">
+      <input type="number" name="discount" placeholder="Discount %" class="input_material auth">
+      <button class="btn btn-white signup large" style="font-size: 13px; height: 45px;" name="add"><i class="fa fa-plus" aria-hidden="true"></i> Add Associate</button>
+
+    </div>
+
+    <div class="col-md-6">
+      <div class="box__steel">
+        <h4>Payment Information</h4>
+        <br>
+        <ul class="list-group">
+
+          <li class="list-group-item clearfix">
+            <span class="pull-left">Lawyer 1</span>
+            <span class="pull-right">$ 1,200.00</span>
+          </li>
+
+
+          <li class="list-group-item clearfix">
+            <span class="pull-left">Lawyer 2</span>
+            <span class="pull-right">$ 1,700.00</span>
+          </li>
+
+          <li class="list-group-item clearfix">
+            <span class="pull-left">Lawyer 3</span>
+            <span class="pull-right">$ 2,200.00</span>
+          </li>
+
+        </ul>
+
+        <ul class="list-group">
+
+          <li class="list-group-item clearfix">
+            <span class="pull-left">Discount - Lawyer 1</span>
+            <span class="pull-right">$ 200.00</span>
+          </li>
+
+        </ul>
+
+        <ul class="list-group">
+
+          <li class="list-group-item clearfix">
+            <span class="pull-left">Total: </span>
+            <span class="pull-right">$ 4,900.00</span>
+          </li>
+
+        </ul>
+      </div>
+      <br>
+      <a href="/home" class="btn btn-white" style="width: 40%" name="next">Save as Draft</a>
+      <a href="/home" class="btn btn-white signup" style="width: 40%" name="next">Send to Client</a>
+    </div>
+    </div>
+
+
+  <br>
+</template>

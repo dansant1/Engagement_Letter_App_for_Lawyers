@@ -1,0 +1,37 @@
+<template name="Setup">
+  {{>menu}}
+  <br>
+  <div class="row_title">
+    <h3>Setup</h3>
+    <div class="row">
+
+      <div class="col-md-4">
+        <h4 class="teal">Invite your Team</h4>
+        <input type="text" name="name" placeholder="Name" class="input_material auth">
+        <input type="email" name="email" placeholder="Email" class="input_material auth">
+        <button class="btn btn-white signup large" style="width: 40%; font-size: 13px; height: 45px;" name="add"><i class="fa fa-plus" aria-hidden="true"></i> Add Member</button>
+      </div>
+      <div class="col-md-4">
+        <h4 class="teal">Add your Signature</h4>
+
+        <label class="btn btn-white signup large  btn-file" style="width: 60%; margin-left: 0; padding-top: 14px; font-size: 13px">
+          Upload Signature <input type="file" style="display: none;">
+        </label>
+
+        <h4 class="teal">- or -</h4>
+
+        <button class="btn btn-white signup large" style="font-size: 13px; width: 60%" name="draw">Draw Signature</button>
+
+      </div>
+      <div class="col-md-4">
+        <h4 class="teal">Upload your Photo</h4>
+        <img src="/images/photo.png" alt="photo" class="photo">
+        <label class="btn btn-white signup large  btn-file" style="width: 60%; margin-left: 0; padding-top: 14px; font-size: 13px">
+          Upload <input type="file" style="display: none;">
+        </label>
+        <button class="btn btn-white signup large" style="font-size: 13px; width: 60%" name="draw">Ready</button>
+      </div>
+    </div>
+
+  </div>
+</template>
