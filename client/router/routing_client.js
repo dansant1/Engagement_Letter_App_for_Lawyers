@@ -64,9 +64,24 @@ FlowRouter.route('/new_letter/step_2', {
 FlowRouter.route('/new_letter/step_3', {
   name: 'New Letter Step 3',
   action() {
+    BlazeLayout.render('New_Letter', { step: 'signature'})
+  }
+})
+
+FlowRouter.route('/new_letter/step_4', {
+  name: 'New Letter Step 3',
+  action() {
     BlazeLayout.render('New_Letter', { step: 'Lawyer_Rates'})
   }
 })
+
+FlowRouter.route('/account/settings', {
+  name: 'Account Settings',
+  action() {
+    BlazeLayout.render('Account', { step: 'Settings'})
+  }
+})
+
 
 // FlowRouter.route('/view_letter/:letterId', {
 //   name: 'View Letter',

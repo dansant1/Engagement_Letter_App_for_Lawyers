@@ -3,10 +3,11 @@
   <div class="row">
     <div class="col-md-6">
       <h4 class="teal">Step 4 - Assign Lawyer</h4>
-      <select style="border-radius: 0px" class="input_material auth" name="engagement_type">
+      <select style="border-radius: 0px" class="input_material auth" name="engagement_charge">
         <option value="0">-- Type of Charge --</option>
-        <option value="1">Retainer</option>
-        <option value="0">Recurring</option>
+        <option value="1">Hourly</option>
+        <option value="2">Retainer</option>
+        <option value="3">Project</option>
       </select>
 
       <select style="border-radius: 0px" class="input_material auth" name="engagement_type">
@@ -14,7 +15,7 @@
         <option value="1">Lawyer 2</option>
         <option value="0">Lawyer 3</option>
       </select>
-      <input type="number" name="amount" placeholder="Amount" class="input_material auth">
+      <input type="number" name="amount" placeholder="{{text}}" class="input_material auth">
       <input type="number" name="discount" placeholder="Discount %" class="input_material auth">
       <button class="btn btn-white signup large" style="font-size: 13px; height: 45px;" name="add"><i class="fa fa-plus" aria-hidden="true"></i> Add Associate</button>
 

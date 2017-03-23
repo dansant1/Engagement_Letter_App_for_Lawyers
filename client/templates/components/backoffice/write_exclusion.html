@@ -1,26 +1,41 @@
 <template name="Write_Exclusion">
   <br>
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-9">
       <h4 class="teal">Step 3 - Write Exclusion</h4>
       <br>
-      <textarea name="engagement" class="input_material area" rows="8" cols="80" placeholder="Write the Engagement Letter"></textarea>
+      <textarea name="engagement" class="input_material area" rows="8" cols="80" placeholder="Describe work outside of scope"></textarea>
       <br>
       <a href="/new_letter/step_3" class="btn btn-white signup" name="next">Next</a>
     </div>
 
-    <div class="col-md-5">
-      <h4 class="teal">Step 4 - Sign Letter</h4>
-      <br>
-      <label class="btn btn-white signup large  btn-file" style="margin-left: 0; padding-top: 14px; font-size: 13px">
-        Upload Signature <input type="file" style="display: none;">
-      </label>
-      <br><br>
-      <h4 class="teal">- or -</h4>
-      <br>
-      <button class="btn btn-white signup large" style="font-size: 13px" name="draw">Draw Signature</button>
 
-    </div>
   </div>
   <br>
+</template>
+
+<template name="signature">
+<br>
+<div class="row">
+  <div class="col-md-6">
+    <h4 class="teal">Step 4 - Sign Letter</h4>
+    <br>
+    <label class="btn btn-white signup large  btn-file" style="margin-left: 0; padding-top: 14px; font-size: 13px">
+      Upload Signature <input type="file" style="display: none;">
+    </label>
+    <br><br>
+    <h4 class="teal">- or -</h4>
+    <br>
+    <button class="btn btn-white signup large" style="font-size: 13px" name="draw">Draw Signature</button>
+
+  </div>
+
+  <div class="col-md-6">
+    <h4 class="teal">Preview of Signature</h4>
+    <div style="width: 80%; border: 1px solid teal; height: 200px">
+
+    </div>
+    <a href="/new_letter/step_4" class="btn btn-white signup" style="width: 40%" name="next">Next</a>
+  </div>
+</div>
 </template>
