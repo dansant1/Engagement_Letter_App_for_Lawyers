@@ -18,12 +18,29 @@
     </div>
 
     <div class="col-md-7">
-      <h4 class="teal">Step 2 - Engagement Type</h4>
-      <select class="input_material auth" name="engagement_type">
-        <option value="0">Type 1</option>
-        <option value="1">Type 2</option>
-        <option value="0">Type 3</option>
-      </select>
+      <h4 class="teal">Step 2</h4>
+      <div class="col-md-6" style="padding: 0">
+        <label for="engagement_template" class="teal">Engagement Type</label>
+        <br>
+        <select class="input_material auth" id="engagement_type" name="engagement_type" style="width: 80%;
+      margin: 20px auto;">
+          <option value="0">Type 1</option>
+          <option value="1">Type 2</option>
+          <option value="0">Type 3</option>
+        </select>
+      </div>
+
+      <div class="col-md-6" style="padding: 0">
+        <label for="engagement_template" class="teal">Engagement Template</label>
+        <br>
+        <select class="input_material auth" id="engagement_template" name="engagement_template" style="width: 80%;
+      margin: 20px auto;">
+          <option value="0">Template 1</option>
+          <option value="1">Template 2</option>
+          <option value="0">Template 3</option>
+        </select>
+      </div>
+
       <br>
       <textarea name="engagement" class="input_material area" rows="8" cols="80" placeholder="Describe the Engagement Scope"></textarea>
       <br>

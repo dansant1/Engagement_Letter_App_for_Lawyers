@@ -61,17 +61,31 @@ FlowRouter.route('/new_letter/step_2', {
   }
 })
 
+// FlowRouter.route('/new_letter/step_3', {
+//   name: 'New Letter Step 3',
+//   action() {
+//     BlazeLayout.render('New_Letter', { step: 'Lawyer_Rates'})
+//   }
+// })
+
 FlowRouter.route('/new_letter/step_3', {
-  name: 'New Letter Step 3',
+  name: 'New Letter Step 3 - Conflicts',
   action() {
-    BlazeLayout.render('New_Letter', { step: 'signature'})
+    BlazeLayout.render('New_Letter', { step: 'Conflicts'})
   }
 })
 
 FlowRouter.route('/new_letter/step_4', {
-  name: 'New Letter Step 3',
+  name: 'New Letter Step 4',
   action() {
     BlazeLayout.render('New_Letter', { step: 'Lawyer_Rates'})
+  }
+})
+
+FlowRouter.route('/new_letter/step_5', {
+  name: 'New Letter Step 5',
+  action() {
+    BlazeLayout.render('New_Letter', { step: 'signature'})
   }
 })
 

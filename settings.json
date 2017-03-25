@@ -1,7 +1,7 @@
 {
 	"galaxy.meteor.com": {
 			"env": {
-        	"ROOT_URL": "http://legalapp.grupoddv.com",
+        	"ROOT_URL": "http://app.engagementletter.co",
 					"MONGO_URL": "mongodb://development:Jera$10390@ds137090.mlab.com:37090/legalapp"
 			}
 	}
