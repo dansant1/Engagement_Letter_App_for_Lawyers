@@ -111,3 +111,40 @@ FlowRouter.route('/view_letter', {
     BlazeLayout.render('Letter_Layout', { letter: 'View_Letter'})
   }
 })
+
+// FlowRouter.route('/client/review_document/:letterId', {
+//   name: 'Review Document',
+//   action() {
+//     BlazeLayout.render('Client_Layout', { letter: 'Review_Letter'})
+//   }
+// })
+
+FlowRouter.route('/client/review_document', {
+  name: 'Review Document',
+  action() {
+    BlazeLayout.render('Client_Layout', { page: 'Review_Letter'})
+  }
+})
+
+
+// FlowRouter.route('/client/payment_letter/:letterId', {
+//   name: 'Review Document',
+//   action() {
+//     BlazeLayout.render('Client_Layout', { page: 'Review_Letter'})
+//   }
+// })
+
+FlowRouter.route('/client/payment_letter', {
+  name: 'Pay Letter',
+  action() {
+    BlazeLayout.render('Client_Layout', { page: 'Pay_Letter'})
+  }
+})
+
+
+FlowRouter.route('/client/sign_letter', {
+  name: 'Sign Letter',
+  action() {
+    BlazeLayout.render('Client_Layout', { page: 'Sign_Letter'})
+  }
+})

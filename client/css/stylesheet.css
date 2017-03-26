@@ -3,8 +3,33 @@ body, html {
   margin: 0;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .dropdown__acount {
   border-radius: 0px;
+}
+
+select {
+  -webkit-border-radius: 0px;
+  -webkit-appearance: none;
+}
+
+.review {
+  width: 90%;
+  height: 90vh;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.col1 {
+  display: inline-block;
+  width: 35%;
+  padding: 5px;
+  height: 75px;
 }
 
 .box__teal {

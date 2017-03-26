@@ -7,6 +7,10 @@
   margin: 0;
 }
 
+.white {
+  color: white
+}
+
 .navbar-default {
     background-color: var(--teal);
     border-color: var(--teal);
