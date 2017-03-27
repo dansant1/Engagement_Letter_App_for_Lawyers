@@ -1,16 +1,16 @@
-Template.Lawyer_Rates.onCreated( () => {
+Template.Mobile_New_Letter_5.onCreated( () => {
   let template = Template.instance();
 
   template.texto = new ReactiveVar('Hourly')
 })
 
-Template.Lawyer_Rates.helpers({
+Template.Mobile_New_Letter_5.helpers({
   text() {
     return Template.instance().texto.get()
   }
 })
 
-Template.Lawyer_Rates.events({
+Template.Mobile_New_Letter_5.events({
   'change [name="engagement_charge"]'(e, t) {
 
     if (e.target.value === "1") {

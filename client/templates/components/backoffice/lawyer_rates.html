@@ -4,7 +4,7 @@
     <div class="col-md-6">
       <h4 class="teal"><a href="/new_letter/step_3" class="teal"><i class="fa fa-arrow-left" aria-hidden="true"></i></a> Step 4 - Assign Lawyer</h4>
       <select style="border-radius: 0px" class="input_material auth" name="engagement_charge">
-        <option value="0">-- Type of Charge --</option>
+
         <option value="1">Hourly</option>
         <option value="2">Retainer</option>
         <option value="3">Project</option>
@@ -17,6 +17,12 @@
       </select>
       <input type="number" name="amount" placeholder="{{text}}" class="input_material auth">
       <input type="number" name="discount" placeholder="Discount %" class="input_material auth">
+      <hr>
+      <input type="number" name="peoject_estimate" disabled placeholder="Project Estimate" class="input_material auth">
+      <input type="number" name="deposit_amount" placeholder="Deposit Amount" class="input_material auth">
+      <br><br>
+      <input type="checkbox" name="recurring" id="recurring" style="display: inline-block; margin-right: 10px"><label class="steel" for="recurring"> Recurring Payment</label>
+      <hr>
       <button class="btn btn-white signup large" style="font-size: 13px; height: 45px;" name="add"><i class="fa fa-plus" aria-hidden="true"></i> Add Associate</button>
 
     </div>

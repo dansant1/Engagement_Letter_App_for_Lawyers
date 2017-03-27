@@ -3,12 +3,25 @@
   outline: none;
 }
 
+a:focus, a:hover {
+  color: white;
+  text-decoration: none;
+}
+
 .navbar {
   margin: 0;
 }
 
 .white {
   color: white
+}
+
+.list-group-item:first-child {
+  border-radius: 0px;
+}
+
+.list-group-item:last-child {
+  border-radius: 0px;
 }
 
 .navbar-default {
