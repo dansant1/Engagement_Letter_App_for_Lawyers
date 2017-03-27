@@ -3,6 +3,7 @@
     <div class="profile_line" style="width: 90%">
 
       <span style="margin-left: 0px"> <a class="white" href="/mobile"><i class="fa fa-arrow-left"></i></a> Step 1 - Client Information</span>
+      <span style="display: inline-block; float: right; width: 0px;" class="white"><a href="/mobile" class="white"><i class="fa fa-home" aria-hidden="true"></i></a></span>
     </div>
 
     <div class="content">
@@ -21,7 +22,7 @@
       <input type="number" name="phone" placeholder="Company Phone" class="input_material auth">
       <input type="text" name="client_name" placeholder="Client Name" class="input_material auth">
       <input type="email" name="client_email" placeholder="Client Email" class="input_material auth">
-      <a href="/mobile/new_letter/2" class="btn btn-white signup large new" style="font-size: 13px; width: 90%; margin: 30px auto; padding-top: 15px;" name="draw"><i class="fa fa-plus" aria-hidden="true"></i> Next</a>
+      <a href="/mobile/new_letter/write_letter" class="btn btn-white signup large new" style="font-size: 13px; width: 90%; margin: 30px auto; padding-top: 15px;" name="draw"><i class="fa fa-plus" aria-hidden="true"></i> Next</a>
 
     </div>
   </div>
@@ -32,9 +33,13 @@
   <div class="profile_line" style="width: 90%">
 
     <span style="margin-left: 0px"> <a class="white" href="/mobile/new_letter"><i class="fa fa-arrow-left"></i></a> Step 2 - Write Letter</span>
+    <span style="display: inline-block; float: right; width: 0px;" class="white"><a href="/mobile" class="white"><i class="fa fa-home" aria-hidden="true"></i></a></span>
+    
   </div>
   <div class="content">
-    <label for="engagement_template" class="teal">Engagement Template</label>
+
+    <textarea name="engagement" class="input_material area" rows="8" cols="80" style="width: 90%; margin: 0 auto;" placeholder="Describe the Engagement Scope"></textarea>
+    <label for="engagement_template" class="teal">Template Text</label>
     <br>
     <select class="input_material auth" id="engagement_template" name="engagement_template" style="width: 90%;
   margin: 20px auto;">
@@ -43,9 +48,7 @@
       <option value="0">Template 3</option>
     </select>
     <br>
-    <textarea name="engagement" class="input_material area" rows="8" cols="80" style="width: 90%; margin: 0 auto;" placeholder="Describe the Engagement Scope"></textarea>
-    <br>
-    <a href="/mobile/new_letter/3"  style="font-size: 13px; width: 90%; margin: 30px auto; padding-top: 15px;" class="btn btn-white signup" name="next">Next</a>
+    <a href="/mobile/new_letter/write_exclusion"  style="font-size: 13px; width: 90%; margin: 30px auto; padding-top: 15px;" class="btn btn-white signup" name="next">Next</a>
   </div>
 
 </div>
@@ -55,10 +58,15 @@
 <div class="all_page_teal">
   <div class="profile_line" style="width: 90%">
 
-    <span style="margin-left: 0px"> <a class="white" href="/mobile/new_letter/2"><i class="fa fa-arrow-left"></i></a> Step 3 - Write Exclusion</span>
+    <span style="margin-left: 0px"> <a class="white" href="/mobile/new_letter/write_letter"><i class="fa fa-arrow-left"></i></a> Step 3 - Write Exclusion</span>
+    <span style="display: inline-block; float: right; width: 0px;" class="white"><a href="/mobile" class="white"><i class="fa fa-home" aria-hidden="true"></i></a></span>
+
   </div>
   <div class="content">
-    <label for="engagement_template" class="teal">Engagement Template</label>
+
+    <textarea name="engagement" class="input_material area" rows="8" cols="80" style="width: 90%; margin: 0 auto;" placeholder="Describe work outside of scope"></textarea>
+
+    <label for="engagement_template" class="teal">Template Text</label>
     <br>
     <select class="input_material auth" id="engagement_template" name="engagement_template" style="width: 90%;
   margin: 20px auto;">
@@ -66,10 +74,8 @@
       <option value="1">Template 2</option>
       <option value="0">Template 3</option>
     </select>
-    <br>
-    <textarea name="engagement" class="input_material area" rows="8" cols="80" style="width: 90%; margin: 0 auto;" placeholder="Describe work outside of scope"></textarea>
-    <br>
-    <a href="/mobile/new_letter/4"  style="font-size: 13px; width: 90%; margin: 30px auto; padding-top: 15px;" class="btn btn-white signup" name="next">Next</a>
+
+    <a href="/mobile/new_letter/conflicts"  style="font-size: 13px; width: 90%; margin: 30px auto; padding-top: 15px;" class="btn btn-white signup" name="next">Next</a>
   </div>
 
 </div>
@@ -79,7 +85,9 @@
 <div class="all_page_teal" style="height: 100%">
   <div class="profile_line" style="width: 90%">
 
-    <span style="margin-left: 0px"> <a class="white" href="/mobile/new_letter/3"><i class="fa fa-arrow-left"></i></a> Step 3 - Conflicts</span>
+    <span style="margin-left: 0px"> <a class="white" href="/mobile/new_letter/write_exclusion"><i class="fa fa-arrow-left"></i></a> Step 3 - Conflicts</span>
+    <span style="display: inline-block; float: right; width: 0px;" class="white"><a href="/mobile" class="white"><i class="fa fa-home" aria-hidden="true"></i></a></span>
+
   </div>
   <div class="content">
 
@@ -134,7 +142,7 @@
         </ul>
 
 
-    <a href="/mobile/new_letter/5"  style="font-size: 13px; width: 100%; margin: 30px auto; padding-top: 15px;" class="btn btn-white signup" name="next">Next</a>
+    <a href="/mobile/new_letter/payments"  style="font-size: 13px; width: 100%; margin: 30px auto; padding-top: 15px;" class="btn btn-white signup" name="next">Next</a>
   </div>
 
 </div>
@@ -144,7 +152,9 @@
 <div class="all_page_teal" style="height: 100%">
   <div class="profile_line" style="width: 90%">
 
-    <span style="margin-left: 0px"> <a class="white" href="/mobile/new_letter/4"><i class="fa fa-arrow-left"></i></a> Step 4 - Payment</span>
+    <span style="margin-left: 0px"> <a class="white" href="/mobile/new_letter/payments"><i class="fa fa-arrow-left"></i></a> Step 4 - Payment</span>
+    <span style="display: inline-block; float: right; width: 0px;" class="white"><a href="/mobile" class="white"><i class="fa fa-home" aria-hidden="true"></i></a></span>
+
   </div>
   <div class="content">
 
@@ -179,7 +189,7 @@
 
 
 
-    <a href="/mobile/new_letter/6"  style="font-size: 13px; width: 100%; margin: 30px auto; padding-top: 15px;" class="btn btn-white signup" name="next">Next</a>
+    <a href="/mobile/new_letter/signature"  style="font-size: 13px; width: 100%; margin: 30px auto; padding-top: 15px;" class="btn btn-white signup" name="next">Next</a>
   </div>
 
 </div>
@@ -189,7 +199,9 @@
 <div class="all_page_teal">
   <div class="profile_line" style="width: 90%">
 
-    <span style="margin-left: 0px"> <a class="white" href="/mobile/new_letter/5"><i class="fa fa-arrow-left"></i></a> Step 5 - Signature</span>
+    <span style="margin-left: 0px"> <a class="white" href="/mobile/new_letter/payments"><i class="fa fa-arrow-left"></i></a> Step 5 - Signature</span>
+    <span style="display: inline-block; float: right; width: 0px;" class="white"><a href="/mobile" class="white"><i class="fa fa-home" aria-hidden="true"></i></a></span>
+
   </div>
   <br><br><br><br>
   <div class="content">
@@ -199,7 +211,7 @@
 
     <a href="/mobile/draw_signature" class="btn btn-white" style="width: 80%">Draw Signature</a>
     <br><br>  <br>
-    <a href="/mobile/new_letter/5"  style="font-size: 13px; width: 80%; margin: 30px auto; padding-top: 15px;" class="btn btn-white signup" name="next">Next</a>
+    <a href="/mobile/"  style="font-size: 13px; width: 80%; margin: 30px auto; padding-top: 15px;" class="btn btn-white signup" name="next">Next</a>
   </div>
 
 </div>
