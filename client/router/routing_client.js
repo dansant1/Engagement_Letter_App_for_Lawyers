@@ -12,6 +12,12 @@ FlowRouter.route('/auth', {
   }
 })
 
+FlowRouter.route('/i/:inviteId', {
+  name: 'Invite',
+  action() {
+    BlazeLayout.render('Auth', { step: 'Auth_Step_1' })
+  }
+})
 
 FlowRouter.route('/login', {
   name: 'Login',
@@ -28,6 +34,13 @@ FlowRouter.route('/', {
 })
 
 FlowRouter.route('/auth_2', {
+  name: 'Auth',
+  action() {
+    BlazeLayout.render('Auth', { step: 'Auth_Step_2' })
+  }
+})
+
+FlowRouter.route('/auth_2/:inviteId', {
   name: 'Auth',
   action() {
     BlazeLayout.render('Auth', { step: 'Auth_Step_2' })
@@ -226,7 +239,6 @@ FlowRouter.route('/mobile/new_letter/payments', {
     BlazeLayout.render("Mobile_New_Letter_5")
   }
 })
-
 
 FlowRouter.route('/mobile/new_letter/signature', {
   name: 'Mobile Design New Letter 6',
