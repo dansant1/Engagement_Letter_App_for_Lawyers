@@ -3,11 +3,11 @@
   <div class="row">
     <div class="col-md-5">
       <h4 class="teal">Step 1 - Client Information</h4>
-      <select class="input_material auth" name="engagement_type">
+      <select class="input_material auth" name="engagement_client">
         <option value="0">-- Choose a Client --</option>
-        <option value="1">Client 1</option>
-        <option value="0">Client 2</option>
-        <option value="0">Client 3</option>
+        {{#each clients}}
+        <option value="{{this._id}}">{{this.company_name}}</option>
+        {{/each}}
       </select>
       <h4 class="teal">- or Add a New Client-</h4>
       <input type="text" name="name" placeholder="Company Name" class="input_material auth">
@@ -15,6 +15,7 @@
       <input type="number" name="phone" placeholder="Company Phone" class="input_material auth">
       <input type="text" name="client_name" placeholder="Client Name" class="input_material auth">
       <input type="email" name="client_email" placeholder="Client Email" class="input_material auth">
+      <input type="button" value="Add Client" name="add_client" class="btn btn-white signup">
     </div>
 
     <div class="col-md-7">
@@ -24,16 +25,11 @@
         <br>
         <select class="input_material auth" id="engagement_type" name="engagement_type" style="width: 80%;
       margin: 20px auto;">
-          <option value="0">Type 1</option>
+          <option value="0">--Choose Type--</option>
           <option value="1">Type 2</option>
-          <option value="0">Type 3</option>
+          <option value="2">Type 3</option>
         </select>
       </div>
-
-      <div class="col-md-6" style="padding: 0">
-
-      </div>
-
       <br>
       <textarea name="engagement" class="input_material area" rows="8" cols="80" placeholder="Describe the Engagement Scope"></textarea>
       <br><br>
@@ -41,11 +37,13 @@
       <br>
       <select class="input_material auth" id="engagement_template" name="engagement_template" style="width: 40%;
     margin: 20px auto;">
-        <option value="0">Template 1</option>
-        <option value="1">Template 2</option>
-        <option value="0">Template 3</option>
+        <option value="?">--Choose Template--</option>
+        {{#each templates}}
+        <option value="{{this.content}}">{{this.name}}</option>
+        {{/each}}
+        <option value="n">--Add Template--</option>
       </select>
-      <a href="/new_letter/step_2" class="btn btn-white signup" name="next">Next</a>
+      <button class="btn btn-white signup" name="next">Next</button>
     </div>
   </div>
   <br>

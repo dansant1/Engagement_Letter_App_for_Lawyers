@@ -14,16 +14,11 @@
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home" style="text-align: center">
               <ul class="list-group">
-
+                {{#each feed}}
                 <li class="list-group-item clearfix">
-                  <p>Lawyer 1 has created a new Engagement Letter to the Client 1</p>
+                  <p>{{this.content}}</p>
                 </li>
-                <li class="list-group-item clearfix">
-                  <p>Lawyer 2 has created a new Engagement Letter to the Client 1</p>
-                </li>
-                <li class="list-group-item clearfix">
-                  <p>Lawyer 3 has created a new Engagement Letter to the Client 2</p>
-                </li>
+                {{/each}}
 
               </ul>
               <a href="#" class="teal"><i class="fa fa-refresh" aria-hidden="true"></i> Load More</a>

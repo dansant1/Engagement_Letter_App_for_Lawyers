@@ -75,35 +75,29 @@ FlowRouter.route('/new_letter', {
   }
 })
 
-FlowRouter.route('/new_letter/step_2', {
+FlowRouter.route('/new_letter/step_2/:letterId', {
   name: 'New Letter Step 2',
   action() {
     BlazeLayout.render('New_Letter', { step: 'Write_Exclusion'})
   }
 })
 
-// FlowRouter.route('/new_letter/step_3', {
-//   name: 'New Letter Step 3',
-//   action() {
-//     BlazeLayout.render('New_Letter', { step: 'Lawyer_Rates'})
-//   }
-// })
 
-FlowRouter.route('/new_letter/step_3', {
+FlowRouter.route('/new_letter/step_3/:letterId', {
   name: 'New Letter Step 3 - Conflicts',
   action() {
     BlazeLayout.render('New_Letter', { step: 'Conflicts'})
   }
 })
 
-FlowRouter.route('/new_letter/step_4', {
+FlowRouter.route('/new_letter/step_4/:letterId', {
   name: 'New Letter Step 4',
   action() {
     BlazeLayout.render('New_Letter', { step: 'Lawyer_Rates'})
   }
 })
 
-FlowRouter.route('/new_letter/step_5', {
+FlowRouter.route('/new_letter/step_5/:letterId', {
   name: 'New Letter Step 5',
   action() {
     BlazeLayout.render('New_Letter', { step: 'signature'})
@@ -118,20 +112,13 @@ FlowRouter.route('/account/settings', {
 })
 
 
-// FlowRouter.route('/view_letter/:letterId', {
-//   name: 'View Letter',
-//   action() {
-//     BlazeLayout.render('View_Letter', { letter: 'Letter_Layout'})
-//   }
-// })
-
-
-FlowRouter.route('/view_letter', {
+FlowRouter.route('/view_letter/:letterId', {
   name: 'View Letter',
   action() {
     BlazeLayout.render('Letter_Layout', { letter: 'View_Letter'})
   }
 })
+
 
 // FlowRouter.route('/client/review_document/:letterId', {
 //   name: 'Review Document',

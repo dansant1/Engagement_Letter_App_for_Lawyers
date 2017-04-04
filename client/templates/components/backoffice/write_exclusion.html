@@ -14,11 +14,13 @@
       <br>
       <select class="input_material auth" id="engagement_template" name="engagement_template" style="width: 40%;
     margin: 20px auto;">
-        <option value="0">Template 1</option>
-        <option value="1">Template 2</option>
-        <option value="0">Template 3</option>
+        <option value="0">--Choose Template--</option>
+        {{#each templates}}
+        <option value="{{this.content}}">{{this.name}}</option>
+        {{/each}}
+        <option value="n">--Add Template--</option>
       </select>
-      <a href="/new_letter/step_3" class="btn btn-white signup" name="next">Next</a>
+      <button class="btn btn-white signup" name="next">Next</button>
     </div>
 
 
