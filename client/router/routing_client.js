@@ -26,6 +26,13 @@ FlowRouter.route('/login', {
   }
 })
 
+FlowRouter.route('/draw_signature', {
+  name: 'Draw',
+  action() {
+    BlazeLayout.render('Backoffice', { page: 'DrawSignature' })
+  }
+})
+
 FlowRouter.route('/', {
   name: 'Auth',
   action() {
