@@ -1,7 +1,7 @@
 Template.Lawyer_Rates.onCreated( () => {
   let template = Template.instance();
 
-  template.texto = new ReactiveVar('Hourly')
+  template.texto = new ReactiveVar('Rate')
   template.hourly = new ReactiveVar(true)
   template.payment = new ReactiveVar([])
   template.discount = new ReactiveVar([])
@@ -43,7 +43,7 @@ Template.Lawyer_Rates.events({
   'change [name="engagement_charge"]'(e, t) {
 
     if (e.target.value === "1") {
-      t.texto.set('Hourly')
+      t.texto.set('Rate')
       t.hourly.set(true)
       t.payment.set([])
       t.total.set(0)
@@ -154,8 +154,77 @@ Template.Lawyer_Rates.events({
 
     t.secondTotal.set(total)
   },
+  'keyup [name="amount"]'(e, t) {
+    let amount = t.find('[name="amount"]').value
+    let discount = t.find('[name="discount"]').value
+    total = amount - (amount/100*discount)
+
+    t.secondTotal.set(total)
+  },
   'click [name="next"]'(e, t) {
     let letterId = FlowRouter.getParam('letterId')
+    let price = t.find('[name="amount"]').value
+    let discount = t.find('[name="discount"]').value
+    let deposit_amount = t.find('[name="deposit_amount"]').value
+    let a = t.payment.get()
+    let array = []
+    if (price !== "") {
+      price = parseInt(price)
+
+      if (discount !== "") {
+        discount = parseInt(discount)
+
+        price = price - (price/100*discount)
+      }
+
+      if (deposit_amount !== "") {
+        deposit_amount = parseInt(deposit_amount)
+
+        price = price - deposit_amount
+      }
+
+
+      if (t.texto.get() === "Rate") {
+        a.push({
+          lawyer: $('#lawyer_assigned option:selected').text(),
+          lawyerId: $('#lawyer_assigned').val(),
+          type: "Hourly",
+          price: price
+        })
+
+      } else if (t.texto.get() === "Project Estimate") {
+          array.push({
+            lawyer: 'Dan Delgado',
+            type: "Project",
+            price: price
+          })
+
+          a = array;
+
+      } else if (t.texto.get() === "Montly Retainer") {
+        array.push({
+          lawyer: 'Dan Delgado',
+          type: "Retainer",
+          price: price
+        })
+
+        a = array;
+      }
+
+
+
+      t.total.set(price)
+      t.payment.set(a)
+
+      t.find('[name="amount"]').value = ""
+      t.find('[name="discount"]').value = ""
+      t.find('[name="deposit_amount"]').value = ""
+      t.find('[name="project_estimate"]').value = ""
+
+    } else {
+      Bert.alert('Compelete the data', 'success')
+    }
+
 
     if (typeof t.payment.get() !== 'undefined' && t.payment.get().length > 0 && t.total.get() !== 0) {
       Meteor.call('paymentEngagementLetter', t.payment.get(), t.total.get(), t.hourly.get(), letterId, (err) => {
