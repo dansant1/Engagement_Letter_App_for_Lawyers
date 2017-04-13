@@ -54,9 +54,15 @@ Template.Auth_Step_1.helpers({
 
 Template.Auth_Step_1.events({
   'click .signup'(e, t) {
-    let email = t.find('[name="email"]').value
-    Session.set('email_signup', email)
+    let email = t.find('[name="email"]').value;
+    Session.set('email_signup', email);
     let inviteId = FlowRouter.getParam('inviteId')
+
+    if (!Session.get('email_signup')) {
+      Bert.alert("Complete your Email")
+      return
+    }
+    
     if (inviteId) {
       FlowRouter.go('/auth_2/' + inviteId)
     } else {
