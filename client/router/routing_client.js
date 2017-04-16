@@ -1,7 +1,7 @@
 FlowRouter.route('/home', {
   name: 'Home',
   action() {
-    BlazeLayout.render('Backoffice', { page: 'home' })
+    BlazeLayout.render('Backoffice', { page: 'home', step: 'Auth_Step_1' })
   }
 })
 

@@ -1,3 +1,7 @@
 <template name="Backoffice">
-  {{>Template.dynamic template=page}}
+	{{#if currentUser}}
+  		{{>Template.dynamic template=page}}
+	{{else}}
+		{{>Auth}}
+	{{/if}}
 </template>

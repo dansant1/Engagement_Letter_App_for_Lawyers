@@ -10,11 +10,18 @@ Template.Login.events({
 
     if (data.email !== "" && data.password !== "") {
 
+      let $button = $('button[type="submit"]')
+
+      $button.prop( "disabled", true )
+      $button.text('Loading...')
+
       Meteor.loginWithPassword(data.email, data.password, (err) => {
         if (err) {
           Bert.alert( err, 'danger', 'growl-top-right' );
+          $button.prop( "disabled", false )
+          $button.text('Login')
         } else {
-            FlowRouter.go('/home')
+          FlowRouter.go('/home')
         }
       })
 

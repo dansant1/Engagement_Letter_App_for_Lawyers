@@ -10,6 +10,10 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+input:-webkit-autofill {
+    -webkit-box-shadow: 2px 2px 2px 1000px #ddd inset;
+}
+
 .dropdown__acount {
   border-radius: 0px;
 }
