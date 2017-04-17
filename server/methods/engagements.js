@@ -1,7 +1,10 @@
+import _getData from '../utilities/getData'
+import { URL } from '../utilities/url'
+
 Meteor.methods({
   createEngagementLetter1(engagement_type, engagement_client, engagement, clientId) {
     if (this.userId) {
-      let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId;
+      let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
 
       let createdBy = this.userId
       let engagementId = Letters.insert({
@@ -9,8 +12,9 @@ Meteor.methods({
       })
 
       return engagementId
+
     } else {
-      return;
+      return
     }
   },
   createEngagementLetter2(exclusion, _id) {
@@ -21,7 +25,7 @@ Meteor.methods({
         }
       })
     } else {
-      return;
+      return
     }
   },
   paymentEngagementLetter(payment, total, hourly, _id) {
@@ -37,17 +41,26 @@ Meteor.methods({
       return;
     }
   },
+  getFirmName(_id) {
+    let firmId = Letters.findOne({_id}).firmId
+    let firmName = Firms.findOne({_id: firmId}).name;
+
+    if (firmName) {
+      return firmName
+    } else {
+      return undefined
+    }
+  },
   saveDraftLetter(_id) {
     if (this.userId) {
+      
+      let { lawyer, client, firmId } =  _getData(_id, this.userId)
+
       Letters.update({_id}, {
         $set: {
-          draft: true
+          status: 'draft'
         }
       })
-      let lawyer = Meteor.users.findOne({_id: this.userId}).profile.first_name + ' ' + Meteor.users.findOne({_id: this.userId}).profile.last_name
-      let clientId = Letters.findOne({_id}).engagement_client;
-      let client = Clients.findOne({_id: clientId}).company_client_name
-      let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
 
       Feed.insert({
         content: `${lawyer} saved the letter for the client ${client}`,
@@ -57,6 +70,41 @@ Meteor.methods({
 
     } else {
       return;
+    }
+  },
+  sendLetterToClient(_id) {
+    if (this.userId) {
+      
+      const { lawyer, client, firmId } =  _getData(_id, this.userId)
+      
+      Letters.update({_id}, {
+        $set: {
+          status: 'pending signature',
+          sendedAt: new Date()
+        }
+      })
+      
+
+
+      Feed.insert({
+        content: `${lawyer} send the letter to the client ${client}`,
+        createdAt: new Date(),
+        firmId
+      })
+
+      Meteor.defer( () => {
+        let { lawyer, firmId } =  _getData(_id, this.userId)
+        let to = URL + 'client/review_document/' + _id
+        console.log(to)
+        Email.send({
+          from: Meteor.users.findOne({_id: this.userId}).emails[0].address,
+          to: 'danieldelgadilloh@gmail.com',
+          text: `${lawyer} sended you his engagement letter. Link to ${to}`
+        })
+      })
+
+    } else {
+      return
     }
   }
 })

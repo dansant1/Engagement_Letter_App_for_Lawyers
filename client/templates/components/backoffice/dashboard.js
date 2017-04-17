@@ -15,8 +15,9 @@ Template.Dashboard.helpers({
   }
 })
 
-Template.Dashboard.events({
+Template.UploadSignature.events({
 	'change [name="upload"]'(event, template) {
 		uploadSignature( { event, template} )
+
 	}
 })

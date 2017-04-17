@@ -125,7 +125,38 @@ Template.DrawSignature.events({
     $button.prop('disabled', true)
     
     let fromOf = $(e.target).data('from')
-    fromOf === "draw" ? convertCanvasToPNG(t.canvas2, $button) :  convertCanvasToPNG(t.canvas, $button)      
+    fromOf === "draw" ? convertCanvasToPNG(t.canvas2, $button) :  convertCanvasToPNG(t.canvas, $button) 
 
+    if ( Session.get('fromOf') ) {
+      FlowRouter.go('/new_letter/step_5/' + Session.get('fromOf'))
+      Session.set('fromOf', undefined) 
+    } else {
+      FlowRouter.go('/home')
+    }
+
+  }
+})
+
+Template.signature.onCreated( () => {
+  let template = Template.instance()
+
+  Session.setDefault('fromOf', undefined) 
+
+  template.autorun( () => {
+    template.subscribe('Signature')
+  }) 
+}) 
+
+Template.signature.helpers({
+  signature() {
+    return Signatures.findOne()
+  }
+})
+
+Template.signature.events({
+  'click [name="draw"]'(e, t) {
+    let letterId = FlowRouter.getParam('letterId')
+    Session.set('fromOf', letterId) 
+    FlowRouter.go('/draw_signature')
   }
 })

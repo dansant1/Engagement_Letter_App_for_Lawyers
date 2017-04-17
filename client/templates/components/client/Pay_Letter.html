@@ -51,7 +51,7 @@
           <p class="steel" style="padding-top: 15px; position: relative; top: 10px">3 digits usually found on the signature strip</p>
         </div>
         <br>
-        <a href="/client/sign_letter" class="btn btn-white signup" style="width: 70%; margin-left: 5px auto" name="next">Next</a>
+        <a href="/client/sign_letter/{{letterId}}" class="btn btn-white signup" style="width: 70%; margin-left: 5px auto" name="next">Next</a>
 
         </div>
       <div class="col-md-6">
@@ -59,31 +59,13 @@
         <div class="box__steel">
           <h4>Payment Information</h4>
           <br>
+          {{#if Template.subscriptionsReady}}
+          {{#with letter}}
           <ul class="list-group">
 
             <li class="list-group-item clearfix">
-              <span class="pull-left">Lawyer 1</span>
-              <span class="pull-right">$ 1,200.00</span>
-            </li>
-
-
-            <li class="list-group-item clearfix">
-              <span class="pull-left">Lawyer 2</span>
-              <span class="pull-right">$ 1,700.00</span>
-            </li>
-
-            <li class="list-group-item clearfix">
-              <span class="pull-left">Lawyer 3</span>
-              <span class="pull-right">$ 2,200.00</span>
-            </li>
-
-          </ul>
-
-          <ul class="list-group">
-
-            <li class="list-group-item clearfix">
-              <span class="pull-left">Discount - Lawyer 1</span>
-              <span class="pull-right">$ 200.00</span>
+              <span class="pull-left">{{type}}</span>
+              <span class="pull-right">$ {{price}}</span>
             </li>
 
           </ul>
@@ -92,10 +74,14 @@
 
             <li class="list-group-item clearfix">
               <span class="pull-left">Total: </span>
-              <span class="pull-right">$ 4,900.00</span>
+              <span class="pull-right">$ {{price}}</span>
             </li>
 
           </ul>
+          {{/with}}
+          {{else}}
+            <h3>Loading...</h3>
+          {{/if}}
         </div>
       </div>
     </div>

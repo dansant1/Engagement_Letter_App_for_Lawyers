@@ -2,7 +2,8 @@ Template.Conflicts.onCreated( () => {
   let template = Template.instance()
 
   template.autorun( () => {
-    template.subscribe('Parties')
+    let letterId = FlowRouter.getParam('letterId')
+    template.subscribe('Parties', letterId)
   })
 
 })

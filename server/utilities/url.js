@@ -19,4 +19,9 @@ let checkUrlValidity = ( url ) => {
   }
 }
 
+const URL = 'http://localhost:3000/'
+
+
+export { URL }
+
 export default checkUrlValidity 
