@@ -1,8 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Great+Vibes|Marck+Script|Playball');
+
 body, html {
   padding: 0;
   margin: 0;
 }
 
+/* Fonts to Signatures*/
+
+.signature__font__01 {
+  font-family: 'Great Vibes', cursive;
+}
+
+.signature__font__02 {
+  font-family: 'Playball', cursive;
+}
+
+.signature__font__03 {
+  font-family: 'Marck Script', cursive;
+}
+
+/* END */
 
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
@@ -142,7 +159,9 @@ select {
   display: block;
   width: 100%;
 }
-.drop > ul > li > a {
+.drop > ul > li > a, .drop > ul > li > button {
+  background-color: transparent;
+  border: none;
   text-decoration: none;
   color: var(--teal);
   width: 100%;
@@ -151,7 +170,19 @@ select {
   white-space: pre;
   box-sizing: border-box;
 }
-.drop > ul > li > a:hover {
+
+.drop > ul > li > button:disabled {
+  background-color: #ebebeb;
+}
+
+.drop > ul > li > button[disabled]:before {
+  content: '✓';
+  font-weight: bold;
+  position: relative;
+  left: -30px;
+}
+
+.drop > ul > li > a:hover, .drop > ul > li > button:hover {
   background: #ebebeb;
 }
 .drop:hover > ul {
@@ -642,4 +673,25 @@ color:#1fc1c8;
        -o-transition:.25s ease-in-out;
           transition:.25s ease-in-out;
   outline:none;
+}
+
+#canvasDiv {
+  background-color: #ddd;
+  text-align: center;
+  padding: 5px;
+}
+
+#canvasDiv > canvas {
+  display: inline-block;
+  background-color: white;
+  margin: 5px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+.giant {
+  padding: 25px !important;
+  padding-top: 25px !important;
+  padding-bottom: 25px !important;
+  font-size: 30px;
 }

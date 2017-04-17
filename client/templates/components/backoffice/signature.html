@@ -23,9 +23,43 @@
     <a href="/home" class="btn btn-white signup" style="width: 40%" name="next">Send to Client</a>
   </div>
 </div>
+
 </template>
 
 <template name="DrawSignature">
+  
   {{>menu}}
-  <div id="canvasDiv"></div>
+
+  <br>
+
+  <div class="container">
+        <ul class="nav nav-tabs">
+          <li class="active"><a data-toggle="tab" href="#home">Draw</a></li>
+          <li><a data-toggle="tab" href="#menu1">Write</a></li>
+        </ul>
+
+        <div class="tab-content">
+          <div id="home" class="tab-pane fade in active">
+            <h3>Draw your Singature</h3>
+            <div id="canvasDiv"></div>
+          </div>
+          <div id="menu1" class="tab-pane fade">
+            <h3>Write your Name</h3>
+            <ul class="nav_material" style="padding-left: 0px">
+              <li class="drop"><i class="fa fa-check" aria-hidden="true"></i> <span>Choose Font</span>
+                <ul>
+                  <li class="sf"><button data-font="01" class="signature__font__01 sd"> Type 01</button></li>
+                  <li class="sf"><button data-font="02" class="signature__font__02 sd">Type 02</button></li>
+                  <li class="sf"><button data-font="03" class="signature__font__03 sd">Type 03</button></li>
+                </ul>
+              </li>
+            </ul>
+            <br>
+            <input type="text" name="signature" class="giant input_material auth">
+            <br>
+            <canvas id="signature__text" width="600" height="100"></canvas>
+          </div>    
+        </div>
+  </div>
+  
 </template>
