@@ -9,7 +9,7 @@ Meteor.methods({
         company_address: data.company_address,
         company_phone: data.company_phone,
         company_client_name: data.company_client_name,
-        company_client_email: data.company_client_name,
+        company_client_email: data.company_client_email,
         firmId: firmId
       })
 

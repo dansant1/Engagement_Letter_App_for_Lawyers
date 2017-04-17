@@ -19,7 +19,7 @@ Template.Write_Letter.helpers({
 
 Template.Write_Letter.events({
   'change [name="engagement_template"]'(e, t) {
-    console.log(e.target.value);
+    
     if (e.target.value === "?" || e.target.value === "n") {
         if (e.target.value === "n") {
           Modal.show('NewTemplate')
