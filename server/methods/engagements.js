@@ -93,14 +93,26 @@ Meteor.methods({
       })
 
       Meteor.defer( () => {
-        let { lawyer, firmId } =  _getData(_id, this.userId)
+        let { lawyer, firmId, client, clientEmail } =  _getData(_id, this.userId)
         let to = URL + 'client/review_document/' + _id
-        console.log(to)
+
+        SSR.compileTemplate('template', Assets.getText('emails/engagement_letter_sended.html'));
+
+        let data = {
+          client,
+          to,
+          lawyer,
+        }
+
+        console.log(clientEmail)
+
         Email.send({
           from: Meteor.users.findOne({_id: this.userId}).emails[0].address,
-          to: 'danieldelgadilloh@gmail.com',
-          text: `${lawyer} sended you his engagement letter. Link to ${to}`
+          to: clientEmail,
+          subject: 'Engagement Letter',
+          html: SSR.render('template', data),
         })
+        
       })
 
     } else {
