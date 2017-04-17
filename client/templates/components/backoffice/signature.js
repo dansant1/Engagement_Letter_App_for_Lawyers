@@ -1,3 +1,5 @@
+import convertCanvasToPNG from '../../../utilities/convertCanvas'
+import uploadSignature from '../../../utilities/upload'
 
 
 Template.DrawSignature.onRendered(() => {
@@ -8,8 +10,9 @@ Template.DrawSignature.onRendered(() => {
     template.ctx = template.canvas.getContext("2d");
     let canvasDiv = document.getElementById('canvasDiv');
     canvas = document.createElement('canvas');
+    template.canvas2 = canvas
     canvas.setAttribute('width', 500);
-    canvas.setAttribute('height', 400);
+    canvas.setAttribute('height', 200);
     canvas.setAttribute('id', 'canvas');
     canvasDiv.appendChild(canvas);
 
@@ -73,7 +76,7 @@ Template.DrawSignature.onRendered(() => {
     });
 
     template.autorun( () => {
-      template.ctx.font = `30px ${template.font.get()}`
+      template.ctx.font = `80px ${template.font.get()}`
       template.ctx.fillText(template.signature.get(), 10, 50);
     })
     
@@ -114,5 +117,15 @@ Template.DrawSignature.events({
         break;
       
     }
+  },
+  'click [name="save"]'(e, t) {
+    let $button = $('[name="save"]')
+    
+    $button.text('Loading...')
+    $button.prop('disabled', true)
+    
+    let fromOf = $(e.target).data('from')
+    fromOf === "draw" ? convertCanvasToPNG(t.canvas2, $button) :  convertCanvasToPNG(t.canvas, $button)      
+
   }
 })

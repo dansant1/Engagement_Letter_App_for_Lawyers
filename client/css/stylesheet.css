@@ -681,12 +681,18 @@ color:#1fc1c8;
   padding: 5px;
 }
 
-#canvasDiv > canvas {
+#canvasDiv > canvas, #signature__text {
   display: inline-block;
   background-color: white;
   margin: 5px;
   border-radius: 4px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.16), 0 2px 8px 0 rgba(0, 0, 0, 0.12);
+}
+
+#signature__text {
+  margin-left: 0;
+  padding: 20px;
+  height: 100px;
 }
 
 .giant {

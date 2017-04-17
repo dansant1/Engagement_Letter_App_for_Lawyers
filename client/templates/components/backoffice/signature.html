@@ -37,11 +37,11 @@
           <li class="active"><a data-toggle="tab" href="#home">Draw</a></li>
           <li><a data-toggle="tab" href="#menu1">Write</a></li>
         </ul>
-
         <div class="tab-content">
           <div id="home" class="tab-pane fade in active">
             <h3>Draw your Singature</h3>
             <div id="canvasDiv"></div>
+            <button data-from="draw" class="btn btn-white signup" name="save">Save</button>
           </div>
           <div id="menu1" class="tab-pane fade">
             <h3>Write your Name</h3>
@@ -56,8 +56,10 @@
             </ul>
             <br>
             <input type="text" name="signature" class="giant input_material auth">
-            <br>
+            <br><br>
             <canvas id="signature__text" width="600" height="100"></canvas>
+            <br>
+            <button data-from="write" class="btn btn-white signup" name="save">Save</button>
           </div>    
         </div>
   </div>
