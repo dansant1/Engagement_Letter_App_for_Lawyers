@@ -1,3 +1,5 @@
+import { validateEmail } from '../../../utilities/validations'
+
 Template.Write_Letter.onCreated( () => {
   let template = Template.instance()
 
@@ -36,6 +38,11 @@ Template.Write_Letter.events({
       company_phone: t.find('[name="phone"]').value,
       company_client_name: t.find('[name="client_name"]').value,
       company_client_email: t.find('[name="client_email"]').value,
+    }
+
+    if (!validateEmail(data.company_client_email)) {
+      Bert.alert('Write a correct email', 'warning')
+      return
     }
 
     if (data.company_name !== "" && data.company_address !== "" && data.company_phone !== "" && data.company_client_name !== "" && data.company_client_email !== "") {
