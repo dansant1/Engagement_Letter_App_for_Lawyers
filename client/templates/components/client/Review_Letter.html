@@ -87,11 +87,15 @@
                 <p class="cent">
                   Very truly yours,
                 </p>
-
-                <p class="cent">
-                  {{lawyer}}
+                {{#with signature}}
+                <p>
+                  <img class="sign_letter" src="{{this.url}}" alt="{{this.url}}">
+                  <br>
+                  <span class="line"></span>
+                  <p>{{lawyer}}</p>
                 </p>
-                <br>
+                {{/with}}
+               <br>
                 <p class="cent">
                   <span class="subline">CONSENT AND AGREEMENT</span>
                 </p>
@@ -109,17 +113,8 @@
                 </p>
               {{/with}}
               <br>
-              {{#with signature}}
-                <p>
-                  <img class="sign_letter" src="{{this.url}}" alt="{{this.url}}">
-                  <br>
-                  <span class="line"></span>
-                  <p>{{lawyer}}</p>
-                </p>
-                <br>
+              
                 <p><hr></p>
-
-              {{/with}}
             {{else}}
               <h2>Loading...</h2>
             {{/if}}
