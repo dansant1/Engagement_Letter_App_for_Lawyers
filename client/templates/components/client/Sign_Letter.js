@@ -9,15 +9,19 @@ Template.Sign_Letter.onCreated(() => {
 	})
 })
 
-Template.Sign_Letter.events({
+Template.Sign_Letter.helpers({
 	signature() {
 		let signature = SignaturesOfClients.findOne()
 
+		console.log(signature);
 
 		if (signature) {
 			return signature
 		} 
-	},
+	}
+})
+
+Template.Sign_Letter.events({
 	'click [name="draw"]'(e, t) {
 		let letterId = FlowRouter.getParam('letterId')
     	let clientId = Letters.findOne().engagement_client
