@@ -5,6 +5,12 @@
 					"MONGO_URL": "mongodb://development:Jera$10390@ds137090.mlab.com:37090/legalapp"
 			}
 	},
+	"public": {
+		"stripe": "pk_test_XR0eUnnzzshel2l8Zhn8rAP1"
+  	},
+  	"private": {
+		"stripe": "sk_test_66VNMkZpI4TQdx1SfEeZJc4Z"
+  	},
 	"AWSAccessKeyId": "AKIAIM25ROQZ6CG3Q5OA",
   	"AWSSecretAccessKey": "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"
 }
