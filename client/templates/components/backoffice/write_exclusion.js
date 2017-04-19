@@ -9,6 +9,13 @@ Template.Write_Exclusion.onCreated(() => {
 Template.Write_Exclusion.helpers({
   templates() {
     return ExclusionTemplates.find()
+  },
+  exclusionToEdit() {
+    if (FlowRouter.getParam('letterId')) {
+      return Letters.findOne().exclusion
+    } else {
+      return ''
+    }
   }
 })
 

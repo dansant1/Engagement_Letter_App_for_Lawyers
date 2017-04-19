@@ -1,5 +1,5 @@
 
-Template.Review_Letter.onCreated( () => {
+Template.frameLetter.onCreated( () => {
 	let template = Template.instance()
 	
 	template.autorun( () =>  {
@@ -11,7 +11,7 @@ Template.Review_Letter.onCreated( () => {
 	})
 })
 
-Template.Review_Letter.helpers({
+Template.frameLetter.helpers({
 	letter() {
 		return Letters.findOne()
 	},

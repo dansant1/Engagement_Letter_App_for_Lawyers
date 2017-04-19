@@ -17,6 +17,23 @@ Meteor.methods({
       return
     }
   },
+  editEngagementLetter1(_id, engagement_type, engagement_client, engagement, clientId) {
+     if (this.userId) {
+      let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
+      let createdAt = new Date()
+      let createdBy = this.userId
+      let engagementId = Letters.update({_id}, {
+        $set: {
+          engagement_type, engagement_client, engagement, createdBy
+        }
+      })
+
+      return engagementId
+
+    } else {
+      return
+    }
+  },
   createEngagementLetter2(exclusion, _id) {
     if (this.userId) {
       Letters.update({_id}, {
@@ -120,5 +137,14 @@ Meteor.methods({
     } else {
       return
     }
+  },
+  signLetter(_id) {
+      
+      Letters.update({_id}, {
+        $set: {
+          status: 'completing'
+        }
+      })
+
   }
 })

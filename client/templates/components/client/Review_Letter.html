@@ -14,7 +14,18 @@
      <div class="review">
         <h4 class="teal">Preview</h4>
         
-        <div class="frame">
+        {{>frameLetter}}
+
+        <br>
+        <a href="/client/payment_letter/{{letterId}}" class="btn btn-white signup" style="width: 25%; float: right; margin-bottom: 20px;" name="next">Next</a>
+        <br><br><br>
+     </div>
+   </div>
+ </div>
+</template>
+
+<template name="frameLetter">
+  <div class="frame">
           <div class="content">
             {{#if Template.subscriptionsReady}}
               <hr>
@@ -133,11 +144,4 @@
             {{/if}}
           </div>
         </div>
-
-        <br>
-        <a href="/client/payment_letter/{{letterId}}" class="btn btn-white signup" style="width: 25%; float: right; margin-bottom: 20px;" name="next">Next</a>
-        <br><br><br>
-     </div>
-   </div>
- </div>
 </template>

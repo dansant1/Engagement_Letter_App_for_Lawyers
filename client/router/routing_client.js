@@ -40,6 +40,13 @@ FlowRouter.route('/client/draw_signature', {
   }
 })
 
+FlowRouter.route('/thanks', {
+  name: 'Thanks',
+  action() {
+    BlazeLayout.render('Client_Layout', { page: 'Thanks' })
+  }
+})
+
 FlowRouter.route('/', {
   name: 'Auth',
   action() {
@@ -130,6 +137,13 @@ FlowRouter.route('/view_letter/:letterId', {
   name: 'View Letter',
   action() {
     BlazeLayout.render('Letter_Layout', { letter: 'View_Letter'})
+  }
+})
+
+FlowRouter.route('/edit_letter/:letterId', {
+  name: 'Edit Letter',
+  action() {
+    BlazeLayout.render('New_Letter', { step: 'Write_Letter'})
   }
 })
 

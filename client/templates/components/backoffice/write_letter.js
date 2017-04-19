@@ -6,6 +6,7 @@ Template.Write_Letter.onCreated( () => {
   template.autorun( () => {
     template.subscribe('Clients')
     template.subscribe('Templates')
+
   })
 
 })
@@ -16,6 +17,13 @@ Template.Write_Letter.helpers({
   },
   templates() {
     return Templates.find()
+  },
+  contentToEdit() {
+    if (FlowRouter.getParam('letterId')) {
+      return Letters.findOne().engagement
+    } else {
+      return ''
+    }
   }
 })
 
@@ -95,12 +103,27 @@ Template.Write_Letter.events({
       engagement = $('[name="engagement"]').val()
     }
 
-    Meteor.call('createEngagementLetter1', engagement_type, engagement_client, engagement, (err, result) => {
-      if (err) {
-        Bert.alert(err, 'danger')
-      } else {
-        FlowRouter.go('/new_letter/step_2/' + result)
-      }
-    })
+    if (!FlowRouter.getParam('letterId')) {
+      console.log('new')
+      Meteor.call('createEngagementLetter1', engagement_type, engagement_client, engagement, (err, result) => {
+        if (err) {
+          Bert.alert(err, 'danger')
+        } else {
+          FlowRouter.go('/new_letter/step_2/' + result)
+        }
+      })
+    } else {
+      
+      Meteor.call('editEngagementLetter1', FlowRouter.getParam('letterId'),  engagement_type, engagement_client, engagement, (err, result) => {
+        if (err) {
+          Bert.alert(err, 'danger')
+        } else {
+          FlowRouter.go('/new_letter/step_2/' + FlowRouter.getParam('letterId'))
+        }
+      })
+    
+    }
+
+    
   }
 })

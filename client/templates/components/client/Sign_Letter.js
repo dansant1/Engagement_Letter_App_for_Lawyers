@@ -29,5 +29,23 @@ Template.Sign_Letter.events({
     	Session.set('isClient', true)
     	Session.set('clientId', clientId)
     	FlowRouter.go('/client/draw_signature')
+	},
+	'click [name="finish"]'(e, t) {
+
+		let signature = SignaturesOfClients.find().fetch().length 
+
+		if (signature > 0) {
+			Meteor.call('signLetter', t.letterId, (err) => {
+				if (!err) {
+					Bert.alert('Letter Signed, Thanks', 'success')
+					FlowRouter.go('/thanks')
+				} else {
+					Bert.alert('Was an Error', 'danger')
+				}
+			})
+		} else {
+			Bert.alert('Sign the Letter', 'warning')
+		}
+
 	}
 })
