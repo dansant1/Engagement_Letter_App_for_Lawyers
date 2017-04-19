@@ -31,21 +31,7 @@
           </ul>
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="home">
-              <ul class="list-group">
-
-                <li class="list-group-item clearfix">
-                  <h3 class="teal">3</h3> <span>Letters Completing</span>
-                </li>
-                <li class="list-group-item clearfix">
-                  <h3>4</h3>
-                  <span>Letters Pending Client Signatures</span>
-                </li>
-                <li class="list-group-item clearfix">
-                  <h3>4</h3>
-                  <span>Letters Pending Payments</span>
-                </li>
-
-              </ul>
+             {{>letterStatus}}
             </div>
           </div>
         </div>
@@ -67,6 +53,24 @@
         </div>
       </div>
   </div>
+</template>
+
+<template name="letterStatus">
+   <ul class="list-group">
+
+                <li class="list-group-item clearfix">
+                  <h3 class="teal">{{completing}}</h3> <span>Letters Completing</span>
+                </li>
+                <li class="list-group-item clearfix">
+                  <h3>{{pendingSignatures}}</h3>
+                  <span>Letters Pending Client Signature</span>
+                </li>
+                <li class="list-group-item clearfix">
+                  <h3>{{pendingPayment}}</h3>
+                  <span>Letters Pending Payment</span>
+                </li>
+
+  </ul>
 </template>
 
 <template name="UploadSignature">

@@ -5,10 +5,10 @@ Meteor.methods({
   createEngagementLetter1(engagement_type, engagement_client, engagement, clientId) {
     if (this.userId) {
       let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
-
+      let createdAt = new Date()
       let createdBy = this.userId
       let engagementId = Letters.insert({
-        engagement_type, engagement_client, engagement, firmId, createdBy
+        engagement_type, engagement_client, engagement, firmId, createdBy, createdAt
       })
 
       return engagementId
@@ -81,7 +81,7 @@ Meteor.methods({
       
       Letters.update({_id}, {
         $set: {
-          status: 'pending signature',
+          status: 'pending_payment',
           sendedAt: new Date()
         }
       })

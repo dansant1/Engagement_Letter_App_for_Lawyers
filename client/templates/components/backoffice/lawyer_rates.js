@@ -173,7 +173,12 @@ Template.Lawyer_Rates.events({
     let price = t.find('[name="amount"]').value
     let discount = t.find('[name="discount"]').value
     let deposit_amount = t.find('[name="deposit_amount"]').value
-    let deferral = t.find('[name="deferral"]').value
+    let deferral = null
+
+    if ( t.find('[name="deferral"]') ) {
+      deferral = t.find('[name="deferral"]').value  
+    }
+     
 
     let a = t.payment.get()
     let array = []

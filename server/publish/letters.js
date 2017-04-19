@@ -8,6 +8,20 @@ Meteor.publish('Letters', function () {
   }
 })
 
+Meteor.publish('LettersEstatus', function () {
+  if (this.userId) {
+    let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
+    return Letters.find({firmId}, {
+    	fields: {
+    		 status: 1
+    	}
+    })
+  } else {
+    this.stop()
+    return;
+  }
+})
+
 Meteor.publish('Letter', function (_id) {
   
     let firmId = Letters.findOne({_id}).firmId

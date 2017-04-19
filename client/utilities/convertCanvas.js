@@ -1,4 +1,4 @@
-import uploader from './uploader'
+import { uploader } from './uploader'
 
 import { addUrlToDatabase } from './upload'
 
