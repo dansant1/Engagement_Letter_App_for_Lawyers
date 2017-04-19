@@ -33,6 +33,13 @@ FlowRouter.route('/draw_signature', {
   }
 })
 
+FlowRouter.route('/client/draw_signature', {
+  name: 'Draw',
+  action() {
+    BlazeLayout.render('Client_Layout', { page: 'DrawSignature'})
+  }
+})
+
 FlowRouter.route('/', {
   name: 'Auth',
   action() {

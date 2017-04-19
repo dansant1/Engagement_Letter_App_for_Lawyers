@@ -58,7 +58,7 @@ let _uploadFileToAmazon = ( file, logo, client, clientId ) => {
 	    	}
   		})
 	} else if (client) {
-		console.log('hola cliente: ', clientId)
+		
 		let client1 = {
 			_id: clientId
 		}

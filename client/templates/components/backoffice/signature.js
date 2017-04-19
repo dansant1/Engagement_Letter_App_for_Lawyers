@@ -119,20 +119,32 @@ Template.DrawSignature.events({
     }
   },
   'click [name="save"]'(e, t) {
+
     let $button = $('[name="save"]')
     
     $button.text('Loading...')
     $button.prop('disabled', true)
     
     let fromOf = $(e.target).data('from')
-    fromOf === "draw" ? convertCanvasToPNG(t.canvas2, $button) :  convertCanvasToPNG(t.canvas, $button) 
+   
 
     if ( Session.get('fromOf') ) {
-      FlowRouter.go('/new_letter/step_5/' + Session.get('fromOf'))
-      Session.set('fromOf', undefined) 
+
+      if (Session.get('isClient')) {
+        fromOf === "draw" ? convertCanvasToPNG(t.canvas2, $button, Session.get('isClient'), Session.get('clientId')) :  convertCanvasToPNG(t.canvas, $button, Session.get('isClient'), Session.get('clientId')) 
+        FlowRouter.go('/client/sign_letter/' + Session.get('fromOf'))
+        Session.set('fromOf', undefined)
+      } else {
+        fromOf === "draw" ? convertCanvasToPNG(t.canvas2, $button) :  convertCanvasToPNG(t.canvas, $button) 
+        FlowRouter.go('/new_letter/step_5/' + Session.get('fromOf'))
+        Session.set('fromOf', undefined)
+      }
+
     } else {
+      fromOf === "draw" ? convertCanvasToPNG(t.canvas2, $button) :  convertCanvasToPNG(t.canvas, $button) 
       FlowRouter.go('/home')
     }
+    
 
   }
 })

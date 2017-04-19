@@ -17,7 +17,13 @@ Template.Sign_Letter.events({
 		if (signature) {
 			return signature
 		} 
-
-		
+	},
+	'click [name="draw"]'(e, t) {
+		let letterId = FlowRouter.getParam('letterId')
+    	let clientId = Letters.findOne().engagement_client
+    	Session.set('fromOf', letterId) 
+    	Session.set('isClient', true)
+    	Session.set('clientId', clientId)
+    	FlowRouter.go('/client/draw_signature')
 	}
 })
