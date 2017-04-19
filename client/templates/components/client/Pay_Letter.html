@@ -14,11 +14,11 @@
       <div class="col-md-6">
         <br>
         <h4 class="teal">Payment Process</h4>
-        <p class="teal">Total: <strong>USD$ 4 900.00</strong></p>
+        <p class="teal">Total: <strong>USD$ {{price}}</strong></p>
         <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" type = "number" maxlength = "15" style="margin-left: 5px;" name="credit_card_number" placeholder="Credit Card Number" class="input_material auth">
 
         <div class="col1">
-          <select style="width: 100%" name="phone" placeholder="Due Year" class="input_material auth">
+          <select style="width: 100%" name="expMo" placeholder="Due Year" class="input_material auth">
             <option value="1">January</option>
             <option value="2">February</option>
             <option value="3">March</option>
@@ -34,7 +34,7 @@
           </select>
         </div>
         <div class="col1">
-            <select style="width: 100%" name="phone" placeholder="Due Year" class="input_material auth">
+            <select style="width: 100%" name="expYr" placeholder="Due Year" class="input_material auth">
               <option value="2017">2017</option>
               <option value="2017">2018</option>
               <option value="2017">2019</option>
@@ -51,7 +51,7 @@
           <p class="steel" style="padding-top: 15px; position: relative; top: 10px">3 digits usually found on the signature strip</p>
         </div>
         <br>
-        <a href="/client/sign_letter/{{letterId}}" class="btn btn-white signup" style="width: 70%; margin-left: 5px auto" name="next">Next</a>
+        <button class="btn btn-white signup" style="width: 70%; margin-left: 5px auto" name="pay">Next</button>
 
         </div>
       <div class="col-md-6">
