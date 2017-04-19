@@ -11,8 +11,10 @@ Meteor.publish('SignatureOfClient', function (_id) {
 	
 	let clientId = Letters.findOne({_id}).engagement_client
 
+
+
 	if (clientId) {
-		return SignaturesOfClients.find({_id: clientId})
+		return SignaturesOfClients.find({clientId})
 	} else {
 		this.stop()
 		return
