@@ -13,8 +13,6 @@ Meteor.methods({
       })
     }
 
-
-
     if (firmId) {
         let userId = Accounts.createUser({
           email: data.email,

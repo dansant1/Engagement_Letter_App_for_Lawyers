@@ -1,4 +1,28 @@
+Template.Setup.onCreated( () => {
+  let template = Template.instance()
+
+  template.autorun( () => {
+    template.subscribe('Logo')
+  })
+
+})
+
+Template.Setup.helpers({
+  logo() {
+    return Logos.findOne()
+  }
+})
+
 Template.Setup.events({
+ 'click [name="draw"]'(e, t) {
+  
+    Session.set('fromOf', undefined) 
+    FlowRouter.go('/draw_signature')
+
+  },
+  'click [name="uploadLogo"]'() {
+
+  },
   'click [name="add_member_team"]'(e, t) {
     let data = {
       name: t.find('[name="name_member"]').value,

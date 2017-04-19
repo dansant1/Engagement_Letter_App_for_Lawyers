@@ -15,7 +15,7 @@
       <div class="col-md-6">
         <br><br>
         <label class="btn btn-white signup large  btn-file" style="margin-left: 0; padding-top: 14px; font-size: 13px">
-          Upload Signature <input type="file" style="display: none;">
+         {{>UploadSignatureOfClient}}
         </label>
         <br>
         <h4 class="teal">- or -</h4>
@@ -26,10 +26,18 @@
 
       <div class="col-md-6">
         <h4 class="teal">Preview of Signature</h4>
+
+        
         <div style="width: 80%; border: 1px solid teal; height: 200px">
-
+          {{#if Template.subscriptionsReady}}
+            {{#with signature}}  
+            <img src="{{this.url}}" alt="{{this.url}}">
+            {{/with}}
+          {{else}}
+            <h3>Loading...</h3>
+          {{/if}}
         </div>
-
+        
         <a href="/auth" class="btn btn-white signup" style="width: 40%" name="next">Sign</a>
       </div>
     </div>

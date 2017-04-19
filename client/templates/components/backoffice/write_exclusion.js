@@ -27,7 +27,7 @@ Template.Write_Exclusion.events({
     let letterId = FlowRouter.getParam('letterId')
 
     let engagement = t.find('[name="engagement"]').value
-    if (engagement !== "" ) {
+    
       Meteor.call('createEngagementLetter2', engagement, letterId, (err) => {
         if (err) {
           Bert.alert(err, 'danger')
@@ -35,6 +35,6 @@ Template.Write_Exclusion.events({
           FlowRouter.go('/new_letter/step_3/' + letterId)
         }
       })
-    }
+    
   }
 })

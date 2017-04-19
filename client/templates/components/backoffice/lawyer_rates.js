@@ -2,6 +2,7 @@ Template.Lawyer_Rates.onCreated( () => {
   let template = Template.instance();
 
   template.texto = new ReactiveVar('Rate')
+  template.textBox = new ReactiveVar(false)
   template.hourly = new ReactiveVar(true)
   template.payment = new ReactiveVar([])
   template.discount = new ReactiveVar([])
@@ -18,6 +19,9 @@ Template.Lawyer_Rates.onCreated( () => {
 Template.Lawyer_Rates.helpers({
   text() {
     return Template.instance().texto.get()
+  },
+  textBox() {
+    return Template.instance().textBox.get()
   },
   lawyers() {
     return Meteor.users.find()
@@ -44,6 +48,7 @@ Template.Lawyer_Rates.events({
 
     if (e.target.value === "1") {
       t.texto.set('Rate')
+      t.textBox.set(false)
       t.hourly.set(true)
       t.payment.set([])
       t.total.set(0)
@@ -55,6 +60,7 @@ Template.Lawyer_Rates.events({
 
     } else if (e.target.value === "2" ) {
       t.texto.set('Montly Retainer')
+      t.textBox.set(true)
       t.hourly.set(false)
       $('[name="lawyers"]').remove()
       t.payment.set([])
@@ -68,6 +74,7 @@ Template.Lawyer_Rates.events({
       $('[name="lawyers"]').remove()
       t.hourly.set(false)
       t.texto.set('Project Estimate')
+      t.textBox.set(true)
       t.total.set(0)
       t.payment.set([])
       t.find('[name="amount"]').value = ""
@@ -166,6 +173,8 @@ Template.Lawyer_Rates.events({
     let price = t.find('[name="amount"]').value
     let discount = t.find('[name="discount"]').value
     let deposit_amount = t.find('[name="deposit_amount"]').value
+    let deferral = t.find('[name="deferral"]').value
+
     let a = t.payment.get()
     let array = []
     if (price !== "") {
@@ -181,6 +190,8 @@ Template.Lawyer_Rates.events({
         deposit_amount = parseInt(deposit_amount)
 
         price = price - deposit_amount
+      } else {
+        deposit_amount = null
       }
 
 
@@ -227,7 +238,12 @@ Template.Lawyer_Rates.events({
 
 
     if (typeof t.payment.get() !== 'undefined' && t.payment.get().length > 0 && t.total.get() !== 0) {
-      Meteor.call('paymentEngagementLetter', t.payment.get(), t.total.get(), t.hourly.get(), letterId, (err) => {
+        
+      if (!deferral) {
+        deferral = null
+      }
+
+      Meteor.call('paymentEngagementLetter', t.payment.get(), t.total.get(), t.hourly.get(), deposit_amount, deferral, letterId, (err) => {
         if (err) {
           Bert.alert(err, 'danger')
         } else {

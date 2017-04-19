@@ -15,25 +15,27 @@
         <h4 class="teal">Add your Signature</h4>
 
         <label class="btn btn-white signup large  btn-file" style="margin-top: 30px; width: 60%; margin-left: 0; padding-top: 14px; font-size: 13px">
-          Upload Signature <input type="file" style="display: none;">
+          {{>UploadSignature}}
         </label>
 
         <h4 class="teal" style="margin-top: 30px;">- or -</h4>
 
         <button class="btn btn-white signup large" style="font-size: 13px; width: 60%; margin-top: 35px" name="draw">Draw Signature</button>
         <hr>
-        <button class="btn btn-white signup large" style="width: 60%; font-size: 13px" name="add_conflict_email"> Email</button>
+        <button class="btn btn-white signup large" style="width: 60%; font-size: 13px"> Email</button>
 
       </div>
       <div class="col-md-4">
-        <h4 class="teal" style="text-align: center">Upload your Photo</h4>
-        <img src="/images/photo.png" alt="photo" class="photo" style="margin-top: 30px; margin-bottom: 55px">
+        <h4 class="teal" style="text-align: center">Upload the Logo Firm</h4>
+       
+        {{#with logo}}
+           <img src="{{this.url}}" alt="photo" class="photo" style="margin-top: 30px; margin-bottom: 55px">
+        {{/with}}
 
         <label class="btn btn-white signup large  btn-file" style="width: 60%; margin: 0 auto; padding-top: 14px; font-size: 13px">
-          Upload <input type="file" style="display: none;">
+          {{>UploadLogo}}
         </label>
         <hr>
-        <button class="btn btn-white signup large" style="font-size: 13px; width: 60%; margin: 20px auto;" name="draw">Save</button>
       </div>
     </div>
     <hr>

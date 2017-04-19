@@ -40,12 +40,13 @@ Template.Write_Letter.events({
       company_client_email: t.find('[name="client_email"]').value,
     }
 
-    if (!validateEmail(data.company_client_email)) {
-      Bert.alert('Write a correct email', 'warning')
-      return
-    }
-
     if (data.company_name !== "" && data.company_address !== "" && data.company_phone !== "" && data.company_client_name !== "" && data.company_client_email !== "") {
+      
+      if (!validateEmail(data.company_client_email)) {
+        Bert.alert('Write a correct email', 'warning')
+        return
+      }
+      
       Meteor.call('add_client', data,  (err) => {
         if (err) {
           t.find('[name="name"]').value = ""

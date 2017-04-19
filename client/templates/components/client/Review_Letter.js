@@ -52,5 +52,27 @@ Template.Review_Letter.helpers({
 	},
 	letterId() {
 		return Template.instance().letterId
+	},
+	project() {
+		if ( this.payment[0].type === 'Project' ) {
+			return true
+		}
+	},
+	hourly() {
+		if ( this.payment[0].type === 'Hourly' ) {
+			return true
+		}	
+
+		return false
+	},
+	retainer() {
+		if ( this.payment[0].type === 'Retainer' ) {
+			return true
+		}
+
+		return false
+	},
+	logo() {
+		return Logos.findOne()
 	}
 })	

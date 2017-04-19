@@ -19,6 +19,11 @@
             {{#if Template.subscriptionsReady}}
               <hr>
               {{#with letter}}
+                <p>
+                  {{#with logo}}
+                    <img id="logo_letter" src="{{this.url}}" alt="{{this.url}}">
+                  {{/with}}
+                </p>
                 <p>{{firmName}}</p>
                 <p>{{lawyer}}</p>
                 <p  class="cent">{{date}}</p>
@@ -28,20 +33,9 @@
                 <p>Dear:</p>
                 <p>Thank you for selecting {{firmName}}, P.S. to represent {{clientCompany}}, a corporation (the “Company”), also referred to as “you” throughout this letter.  We will represent the entity and none of its officers, directors or shareholders.  This letter confirms the terms on which we will represent you (the Company) in this matter.
                 </p>
-                <p>We understand that we will be representing you in connection with {{this.engagement}} . We will also represent you in connection with other matters as we may agree to from time to time. 
-                </p>
-                <p>Please be aware that it is the responsibility of the officers and directors of the company to make sure that the company meets the various deadlines applicable to it.  There are a variety of deadlines that will apply to your business.  For example, if you sell securities you may have to file a Form D within 15 days of the first sale.  We cannot help the company meet this deadline unless you retain us to do so and unless you keep us informed.  For example, if you don’t tell us that you made a sale of securities until after the deadline, you will have missed the deadline.  Or, if you don’t tell us you sold securities until the 13th day after the first sale, we probably won’t be able to meet the deadline if you don’t yet have your SEC filing codes because they take a couple of days to obtain, typically.  Similarly, if you accept investments from foreign persons, you may have to file information reports with the U.S. Bureau of Economic Analysis.  It is your responsibility to file such reports, unless you specifically retain us to do so.  Please keep us apprized on a regular and consistent basis of your business so that we can be of assistance to you.  </p>
-                <p>I will be the lawyer primarily responsible for this matter.  In order to make our services as cost effective and timely as possible and to take advantage of specialized knowledge, I may delegate portions of the work to other selected lawyers and paralegals. </p>
-                <p>During the course of representing you, we may need to pay third parties for filing or similar fees.  We may ask you to provide us with a credit card number to pay such amounts.  Alternatively, if we advance them on your behalf, you agree to reimburse us promptly.
-                </p>
+               
                 <p>
-                  We will endeavor to inform you promptly of material developments in our work and will consult with you about decisions relating to those matters.  We encourage you to advise us of developments that might affect our work for you and to let us know of any concerns or questions you might have about our services.  While we cannot promise any particular result in this matter, we will use our best efforts to obtain the most favorable outcome.
-                </p>
-                <p>
-                  We would like to remind you that communications between you and our firm relating to our legal advice are confidential and, in most circumstances, protected from disclosure in court proceedings by the attorney-client privilege.  Not only oral communications, but also letters, notes of conversations, e-mails and documents (including our billings) are usually covered by the privilege.  In order to protect this privilege, you should not discuss or otherwise disclose to anyone our advice to you or any related documents.  If you have any questions regarding the attorney-client privilege, please ask.
-                </p>
-                <p>
-                  Please review the following standard terms of engagement and call me if you have any questions.  Unless otherwise agreed in writing by us, these terms will govern our relationship with you.
+                  <span class="subline">Scope of Representation.</span> We understand that we will be representing you in connection with We will also represent you in connection with {{this.engagement}} We will also represent you in connection with other matters as we may agree to from time to time. The following are excluded from our services:  {{this.exclusion}}
                 </p>
 
                 <p>
@@ -55,11 +49,29 @@
                 <p>
                   <span class="subline">No Assurance of Results or Costs.</span>  Because legal representation is affected by many factors outside our control, regardless of any estimates of costs or predicted results that may be given, we cannot assure results or guarantee total costs.
                 </p>
+        
+                
+                {{#if hourly}}
+                    <p>Hourly rate is $ {{this.total}}</p>
+                {{/if}}
 
-                <p>
+                {{#if project}}
+                  <p>The project estimate is $ {{this.total}}.</p> <p>{{#if this.deposit}}  The deposit is $ {{this.deposit}} {{/if}}</p>
+                {{/if}}
+
+                {{#if retainer}}
+                  <p>
                   <span class="subline">Monthly Statements.</span>  Generally, we will provide you with monthly statements.  Payment is due upon receipt of our bill.  If not paid in full within 30 days of the statement date, your account will incur late charges at 1% per month.  If you do not keep your account current, we reserve the right to apply any deposits in trust, suspend work and/or withdraw from further representation as provided below.
-                </p>
+                  </p>
+                  <p>The monthly retainer for this project is $ {{this.total}}</p>
+                {{/if}}
 
+                {{#if this.deferral}}
+                  <p>
+                    {{this.deferral}}
+                  </p>
+                {{/if}}
+          
                 <p>
                    <span class="subline">Termination of Services.</span>  You may terminate our firm’s services at any time, subject to the payment of then incurred fees and costs, together with payment of any charges for dealing with any successor counsel.  Similarly, we retain the right to cease performing legal services and terminate our representation of you for any reason consistent with applicable rules of professional conduct, including conflicts of interest and nonpayment of legal fees.  We will try to identify in advance and discuss any situation that may lead to our withdrawal and, if withdrawal becomes necessary, we will provide you with written notice prior to our withdrawal.
                 </p>
@@ -92,7 +104,8 @@
                   <img class="sign_letter" src="{{this.url}}" alt="{{this.url}}">
                   <br>
                   <span class="line"></span>
-                  <p>{{lawyer}}</p>
+
+                  <p class="cent">{{lawyer}}</p>
                 </p>
                 {{/with}}
                <br>

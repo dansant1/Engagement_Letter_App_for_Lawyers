@@ -28,12 +28,14 @@ Meteor.methods({
       return
     }
   },
-  paymentEngagementLetter(payment, total, hourly, _id) {
+  paymentEngagementLetter(payment, total, hourly, deposit, deferral, _id) {
     if (this.userId) {
       Letters.update({_id}, {
         $set: {
           payment,
           total,
+          deposit,
+          deferral,
           hourly
         }
       })
@@ -104,7 +106,7 @@ Meteor.methods({
           lawyer,
         }
 
-        console.log(clientEmail)
+       
 
         Email.send({
           from: Meteor.users.findOne({_id: this.userId}).emails[0].address,

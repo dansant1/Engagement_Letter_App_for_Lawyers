@@ -17,6 +17,11 @@ Meteor.publish('Letter', function (_id) {
 	    	Letters.find({_id, firmId}),
 	    	Firms.find({_id: firmId}),
 	    	Clients.find({_id: clientId}),
+	    	Logos.find({firmId}, {
+	    		fields: {
+	    			url: 1
+	    		}
+	    	}),
 	    	Meteor.users.find({_id: Letters.findOne({_id}).createdBy}, { 
 	    		fields: {
 	    			profile: 1
