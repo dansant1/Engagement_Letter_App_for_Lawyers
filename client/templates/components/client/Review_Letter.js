@@ -1,3 +1,8 @@
+Template.Review_Letter.helpers({
+	letterId() {
+		return FlowRouter.getParam('letterId')
+	}
+})
 
 Template.frameLetter.onCreated( () => {
 	let template = Template.instance()
@@ -43,15 +48,15 @@ Template.frameLetter.helpers({
 	clientCompany() {
 		return Clients.findOne().company_name
 	},
+	clientAddress() {
+		return Clients.findOne().company_address
+	},
 	lawyer() {
 		let user = Meteor.users.findOne().profile
 		return  user.first_name + ' ' + user.last_name
 	},
 	signature() {
 		return Signatures.findOne()
-	},
-	letterId() {
-		return Template.instance().letterId
 	},
 	project() {
 		if ( this.payment[0].type === 'Project' ) {

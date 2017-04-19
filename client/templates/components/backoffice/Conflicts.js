@@ -14,6 +14,13 @@ Template.Conflicts.helpers({
   },
   opossingParties() {
     return Parties.find({type: 'opossing_party'})
+  },
+  disabled() {
+    if (Parties.find({}).fetch().length > 0) {
+      return ''
+    } else {
+      return 'disabled'
+    }
   }
 })
 
@@ -29,6 +36,9 @@ Template.Conflicts.events({
           Bert.alert(err, 'danger')
         } else {
           t.find('[name="partyname"]').value = ""
+
+          $('[name="next"]').prop('disabled', false)
+
           Bert.alert('Party added', 'success')
         }
       })
@@ -48,6 +58,7 @@ Template.Conflicts.events({
           Bert.alert(err, 'danger')
         } else {
           t.find('[name="opposingpartyname"]').value = ""
+          $('[name="next"]').prop('disabled', false)
           Bert.alert('Party added', 'success')
         }
       })
@@ -56,6 +67,10 @@ Template.Conflicts.events({
     }
   },
   'click [name="next"]'(e, t) {
+    let letterId = FlowRouter.getParam('letterId')
+    FlowRouter.go('/new_letter/step_4/' + letterId)
+  },
+  'click [name="skip"]'(e, t) {
     let letterId = FlowRouter.getParam('letterId')
     FlowRouter.go('/new_letter/step_4/' + letterId)
   }

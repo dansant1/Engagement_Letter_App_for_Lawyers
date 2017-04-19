@@ -109,7 +109,7 @@ Template.Write_Letter.events({
         if (err) {
           Bert.alert(err, 'danger')
         } else {
-          FlowRouter.go('/new_letter/step_2/' + result)
+          FlowRouter.go('/new_letter/step_3/' + result)
         }
       })
     } else {
@@ -118,7 +118,7 @@ Template.Write_Letter.events({
         if (err) {
           Bert.alert(err, 'danger')
         } else {
-          FlowRouter.go('/new_letter/step_2/' + FlowRouter.getParam('letterId'))
+          FlowRouter.go('/new_letter/step_3/' + FlowRouter.getParam('letterId'))
         }
       })
     

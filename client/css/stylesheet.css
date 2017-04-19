@@ -445,6 +445,10 @@ ul.list-group li {
   top: 35%;
 }
 
+#point:hover {
+  cursor: pointer;
+}
+
 .centrar p {
   margin-bottom: 20px;
 }
