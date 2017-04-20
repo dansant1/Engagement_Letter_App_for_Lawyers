@@ -1,3 +1,6 @@
 Meteor.startup( () => {
-	Stripe.setPublishableKey(Meteor.settings.public.stripe)
+	var stripeKey = Meteor.settings.public.stripe
+  	Stripe.setPublishableKey( stripeKey );
+	
+	
 })
