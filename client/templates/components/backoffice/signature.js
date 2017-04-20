@@ -76,8 +76,8 @@ Template.DrawSignature.onRendered(() => {
     });
 
     template.autorun( () => {
-      template.ctx.font = `80px ${template.font.get()}`
-      template.ctx.fillText(template.signature.get(), 10, 50);
+      template.ctx.font = `70px ${template.font.get()}`
+      template.ctx.fillText(template.signature.get(), 30, 80);
     })
     
     
@@ -140,9 +140,13 @@ Template.DrawSignature.events({
         Session.set('fromOf', undefined)
       }
 
+      Bert.alert('Signed', 'success')
+
     } else {
       fromOf === "draw" ? convertCanvasToPNG(t.canvas2, $button) :  convertCanvasToPNG(t.canvas, $button) 
       FlowRouter.go('/home')
+
+      Bert.alert('Signed', 'success')
     }
     
 

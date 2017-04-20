@@ -238,7 +238,7 @@ Template.Lawyer_Rates.events({
       t.find('[name="project_estimate"]').value = ""
 
     } else {
-      Bert.alert('Compelete the data', 'success')
+      Bert.alert('Compelete the data', 'warning')
     }
 
 
@@ -256,7 +256,7 @@ Template.Lawyer_Rates.events({
         }
       })
     } else {
-      Bert.alert('Complete the payment Information', 'success')
+      Bert.alert('Complete the payment Information', 'warning')
 
     }
 

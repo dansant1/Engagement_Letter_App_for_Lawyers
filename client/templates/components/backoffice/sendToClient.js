@@ -6,6 +6,7 @@ Template.sendToClient.events({
 			Meteor.call('sendLetterToClient', letterId, (err) => {
 				if (!err) {
 					FlowRouter.go('/home')
+					Bert.alert('Engagement Letter Sended', 'success')
 				} else {
 					Bert.alert('ERROR!', 'danger')
 				}
