@@ -12,7 +12,7 @@ Template.DrawSignature.onRendered(() => {
     canvas = document.createElement('canvas');
     template.canvas2 = canvas
     canvas.setAttribute('width', 500);
-    canvas.setAttribute('height', 200);
+    canvas.setAttribute('height', 220);
     canvas.setAttribute('id', 'canvas');
     canvasDiv.appendChild(canvas);
 
@@ -76,8 +76,8 @@ Template.DrawSignature.onRendered(() => {
     });
 
     template.autorun( () => {
-      template.ctx.font = `70px ${template.font.get()}`
-      template.ctx.fillText(template.signature.get(), 30, 80);
+      template.ctx.font = `65px ${template.font.get()}`
+      template.ctx.fillText(template.signature.get(), 30, 75);
     })
     
     
