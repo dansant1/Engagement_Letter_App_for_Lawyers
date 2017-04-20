@@ -40,6 +40,13 @@ Template.Lawyer_Rates.helpers({
   },
   estimate() {
     return Template.instance().secondTotal.get()
+  },
+  deferral() {
+    if (FlowRouter.getParam('letterId')) {
+      return Letters.findOne().deferral
+    } else {
+      return ''
+    }
   }
 })
 
