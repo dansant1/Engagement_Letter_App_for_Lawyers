@@ -28,12 +28,48 @@ Template.Write_Letter.helpers({
 })
 
 Template.Write_Letter.events({
-  'change [name="engagement_template"]'(e, t) {
-    
-    if (e.target.value === "?" || e.target.value === "n") {
-        if (e.target.value === "n") {
-          Modal.show('NewTemplate')
+  'click [name="engagement_template"]'(e, t) {
+    let tipo = $('#engagement_type').val()
+    if (e.target.value == "?") {
+
+      if (  tipo !== "0" ) {
+
+        if (tipo == "1") {
+          t.find('[name="engagement"]').value = 'to represent you in connection with the dissolution of your entity, [name], and related tax issues. This letter confirms the terms on which we will represent you in this matter.'
+          return
+        } else if ( tipo == "2") {
+          t.find('[name="engagement"]').value = ' [the formation of the company and its initial stock issuances].  [You will be responsible for applying for and obtaining all taxpayer identification numbers and business licenses and for making any tax elections (such as S Corporation elections).  Individual stockholders will be responsible for timely filing their own tax filings (as we do not represent them), such as 83(b) elections.]'
+          return
         }
+
+      }
+
+
+    }
+  },
+  'change [name="engagement_template"]'(e, t) {
+
+    if (e.target.value === "n") {
+        Modal.show('NewTemplate')
+        return
+    }
+
+    if (e.target.value === "?" ) {
+
+        let tipo = $('#engagement_type').val()
+
+        if (  tipo !== "0" ) {
+
+          if (tipo == "1") {
+            t.find('[name="engagement"]').value = 'to represent you in connection with the dissolution of your entity, [name], and related tax issues. This letter confirms the terms on which we will represent you in this matter.'
+            return
+          } else if ( tipo == "2") {
+            t.find('[name="engagement"]').value = ' [the formation of the company and its initial stock issuances].  [You will be responsible for applying for and obtaining all taxpayer identification numbers and business licenses and for making any tax elections (such as S Corporation elections).  Individual stockholders will be responsible for timely filing their own tax filings (as we do not represent them), such as 83(b) elections.]'
+            return
+          }
+
+        }
+
     } else {
       t.find('[name="engagement"]').value = e.target.value
     }
@@ -49,12 +85,12 @@ Template.Write_Letter.events({
     }
 
     if (data.company_name !== "" && data.company_address !== "" && data.company_phone !== "" && data.company_client_name !== "" && data.company_client_email !== "") {
-      
+
       if (!validateEmail(data.company_client_email)) {
         Bert.alert('Write a correct email', 'warning')
         return
       }
-      
+
       Meteor.call('add_client', data,  (err) => {
         if (err) {
           t.find('[name="name"]').value = ""
@@ -113,7 +149,7 @@ Template.Write_Letter.events({
         }
       })
     } else {
-      
+
       Meteor.call('editEngagementLetter1', FlowRouter.getParam('letterId'),  engagement_type, engagement_client, engagement, (err, result) => {
         if (err) {
           Bert.alert(err, 'danger')
@@ -121,9 +157,9 @@ Template.Write_Letter.events({
           FlowRouter.go('/new_letter/step_3/' + FlowRouter.getParam('letterId'))
         }
       })
-    
+
     }
 
-    
+
   }
 })
