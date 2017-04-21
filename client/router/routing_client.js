@@ -155,6 +155,13 @@ FlowRouter.route('/client/review_document/:letterId', {
   }
 })
 
+FlowRouter.route('/client/ready_document/:letterId', {
+  name: 'Review Document',
+  action() {
+    BlazeLayout.render('Ready_Letter')
+  }
+})
+
 
 FlowRouter.route('/client/payment_letter/:letterId', {
   name: 'Pay Letter',

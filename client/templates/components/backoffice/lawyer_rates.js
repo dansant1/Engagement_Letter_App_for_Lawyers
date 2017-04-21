@@ -43,7 +43,7 @@ Template.Lawyer_Rates.helpers({
   },
   deferral() {
     if (FlowRouter.getParam('letterId')) {
-      return Letters.findOne().deferral
+      return Letters.findOne().deferral ? Letters.findOne().deferral : '' 
     } else {
       return ''
     }
@@ -142,8 +142,7 @@ Template.Lawyer_Rates.events({
 
 
       let a = t.payment.get()
-      console.log($('#lawyer_assigned').val());
-      console.log($('#lawyer_assigned option:selected').text());
+
       a.push({
         lawyer: $('#lawyer_assigned option:selected').text(),
         lawyerId: $('#lawyer_assigned').val(),
@@ -183,9 +182,9 @@ Template.Lawyer_Rates.events({
     let deferral = null
 
     if ( t.find('[name="deferral"]') ) {
-      deferral = t.find('[name="deferral"]').value  
+      deferral = t.find('[name="deferral"]').value
     }
-     
+
 
     let a = t.payment.get()
     let array = []
@@ -250,7 +249,7 @@ Template.Lawyer_Rates.events({
 
 
     if (typeof t.payment.get() !== 'undefined' && t.payment.get().length > 0 && t.total.get() !== 0) {
-        
+
       if (!deferral) {
         deferral = null
       }
@@ -259,7 +258,15 @@ Template.Lawyer_Rates.events({
         if (err) {
           Bert.alert(err, 'danger')
         } else {
-          FlowRouter.go('/new_letter/step_5/' + letterId)
+          Meteor.call('sendLetterToClient', letterId, (err) => {
+    				if (!err) {
+    					FlowRouter.go('/home')
+    					Bert.alert('Engagement Letter Sended', 'success')
+    				} else {
+    					Bert.alert('ERROR!', 'danger')
+    				}
+    			})
+
         }
       })
     } else {
@@ -279,6 +286,33 @@ Template.Lawyer_Rates.events({
           FlowRouter.go('/home')
         }
       })
+    }
+  }
+})
+
+Template.Lawyer_Rates.onCreated(() => {
+  let template = Template.instance()
+
+  template.autorun( () => {
+    template.subscribe('Payment_Templates')
+  })
+})
+
+Template.Lawyer_Rates.helpers({
+  templates() {
+    return PaymentTemplates.find()
+  }
+})
+
+Template.Lawyer_Rates.events({
+  'change [name="engagement_template"]'(e, t) {
+    if (e.target.value === "n") {
+      Modal.show('NewPaymentTemplate')
+      return;
+    }
+
+    if (e.target.value !== "0") {
+      t.find('[name="deferral"]').value = e.target.value
     }
   }
 })

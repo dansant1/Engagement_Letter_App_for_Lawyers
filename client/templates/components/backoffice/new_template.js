@@ -36,3 +36,22 @@ Template.NewExclusionTemplate.events({
     }
   }
 })
+
+Template.NewPaymentTemplate.events({
+  'click [name="add_template"]'(e, t) {
+    let content = t.find('[name="engagement"]').value;
+    let name = t.find('[name="template_name"]').value;
+    if (content !== "") {
+      Meteor.call('add_payment_template', content, name, (err) => {
+        if (err) {
+          Bert.alert(err, 'danger')
+        } else {
+          Modal.hide('NewPaymentTemplate')
+          Bert.alert('Template Added', 'success')
+        }
+      })
+    } else {
+      Bert.alert('Complete', 'warning')
+    }
+  }
+})

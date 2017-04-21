@@ -72,7 +72,7 @@ Meteor.methods({
   },
   saveDraftLetter(_id) {
     if (this.userId) {
-      
+
       let { lawyer, client, firmId } =  _getData(_id, this.userId)
 
       Letters.update({_id}, {
@@ -93,16 +93,16 @@ Meteor.methods({
   },
   sendLetterToClient(_id) {
     if (this.userId) {
-      
+
       const { lawyer, client, firmId } =  _getData(_id, this.userId)
-      
+
       Letters.update({_id}, {
         $set: {
           status: 'pending_payment',
           sendedAt: new Date()
         }
       })
-      
+
 
 
       Feed.insert({
@@ -123,7 +123,7 @@ Meteor.methods({
           lawyer,
         }
 
-       
+
 
         Email.send({
           from: Meteor.users.findOne({_id: this.userId}).emails[0].address,
@@ -131,7 +131,7 @@ Meteor.methods({
           subject: 'Engagement Letter',
           html: SSR.render('template', data),
         })
-        
+
       })
 
     } else {
@@ -139,11 +139,39 @@ Meteor.methods({
     }
   },
   signLetter(_id) {
-      
+
       Letters.update({_id}, {
         $set: {
           status: 'completing'
         }
+      })
+
+      Meteor.defer( () => {
+
+        let user = Letters.findOne({_id}).createdBy
+
+        let { lawyer, firmId, client, clientEmail } =  _getData(_id, user)
+        let to = URL + 'client/ready_document/' + _id
+
+        SSR.compileTemplate('template', Assets.getText('emails/engagement_letter_ready.html'));
+
+        let data = {
+          client,
+          to,
+          lawyer,
+          firm: Firms.findOne({_id: firmId}).name,
+          lawyerEmail: Meteor.users.findOne({_id: user}).emails[0].address
+        }
+
+
+
+        Email.send({
+          from: Meteor.users.findOne({_id: user}).emails[0].address,
+          to: clientEmail,
+          subject: `Executed Agreement ${client}` ,
+          html: SSR.render('template', data),
+        })
+
       })
 
   }

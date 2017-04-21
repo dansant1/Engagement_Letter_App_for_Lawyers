@@ -6,13 +6,13 @@ Template.Review_Letter.helpers({
 
 Template.frameLetter.onCreated( () => {
 	let template = Template.instance()
-	
+
 	template.autorun( () =>  {
-		template.letterId = FlowRouter.getParam('letterId') 	
-		
+		template.letterId = FlowRouter.getParam('letterId')
+
 		template.subscribe('Letter', template.letterId)
 
-		
+
 	})
 })
 
@@ -23,8 +23,22 @@ Template.frameLetter.helpers({
 	firmName() {
 	 	return Firms.findOne().name
 	},
+	susan() {
+		if (this.engagement_type === "1") {
+			return true
+		}
+
+		return false
+	},
+	joe() {
+		if (this.engagement_type === "2") {
+			return true
+		}
+
+		return false
+	},
 	date() {
-		
+
 		let letter = Letters.findOne()
 
 		let date = letter.sendedAt ?  letter.sendedAt : new Date()
@@ -39,7 +53,7 @@ Template.frameLetter.helpers({
   		let day = date.getDate();
   		let monthIndex = date.getMonth();
   		let year = date.getFullYear();
-		
+
 		return day + ' ' + monthNames[monthIndex] + ' ' + year
 	},
 	clientName() {
@@ -66,7 +80,7 @@ Template.frameLetter.helpers({
 	hourly() {
 		if ( this.payment[0].type === 'Hourly' ) {
 			return true
-		}	
+		}
 
 		return false
 	},
@@ -80,4 +94,4 @@ Template.frameLetter.helpers({
 	logo() {
 		return Logos.findOne()
 	}
-})	
+})
