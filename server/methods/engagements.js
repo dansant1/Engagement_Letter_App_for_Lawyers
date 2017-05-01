@@ -73,7 +73,7 @@ Meteor.methods({
   },
   saveDraftLetter(_id) {
     if (this.userId) {
-      
+
       let { lawyer, client, firmId } =  _getData(_id, this.userId)
 
       Letters.update({_id}, {
@@ -94,16 +94,16 @@ Meteor.methods({
   },
   sendLetterToClient(_id) {
     if (this.userId) {
-      
+
       const { lawyer, client, firmId } =  _getData(_id, this.userId)
-      
+
       Letters.update({_id}, {
         $set: {
           status: 'pending_payment',
           sendedAt: new Date()
         }
       })
-      
+
 
 
       Feed.insert({
@@ -124,7 +124,7 @@ Meteor.methods({
           lawyer,
         }
 
-       
+
 
         Email.send({
           from: Meteor.users.findOne({_id: this.userId}).emails[0].address,
@@ -132,7 +132,7 @@ Meteor.methods({
           subject: 'Engagement Letter',
           html: SSR.render('template', data),
         })
-        
+
       })
 
     } else {
@@ -140,11 +140,63 @@ Meteor.methods({
     }
   },
   signLetter(_id) {
-      
+
       Letters.update({_id}, {
         $set: {
           status: 'completing'
         }
+      })
+
+      Meteor.defer( () => {
+        let date = Letters.findOne({_id}).sendedAt
+
+    		const monthNames = [
+    		    "January", "February", "March",
+    		    "April", "May", "June", "July",
+    		    "August", "September", "October",
+    		    "November", "December"
+      		]
+
+      		let day = date.getDate();
+      		let monthIndex = date.getMonth();
+      		let year = date.getFullYear();
+
+    		let dated = day + ' ' + monthNames[monthIndex] + ' ' + year
+
+        let user = Letters.findOne({_id}).createdBy
+
+        let deposit = Letters.findOne({_id}).deposit ? 'The deposit of $ ' + Letters.findOne({_id}).deposit + ' has been paid' : '';
+
+        let { lawyer, firmId, client, clientEmail } =  _getData(_id, user)
+        let to = URL + 'client/ready_document/' + _id
+
+        SSR.compileTemplate('template_to_client', Assets.getText('emails/engagement_letter_ready.html'));
+        SSR.compileTemplate('template_to_lawyer', Assets.getText('emails/engagement_letter_ready_to_lawyer.html'));
+
+        let data = {
+          client,
+          to,
+          lawyer,
+          dated,
+          deposit,
+          firm: Firms.findOne({_id: firmId}).name,
+          lawyerEmail: Meteor.users.findOne({_id: user}).emails[0].address
+        }
+
+        Email.send({
+          from: 'hello@engagementletter.co',
+          to: data.lawyerEmail,
+          subject: `Executed Agreement ${client}` ,
+          html: SSR.render('template_to_lawyer', data),
+        })
+
+        Email.send({
+          from: 'hello@engagementletter.co',
+          to: clientEmail,
+          subject: `Executed Agreement ${client}` ,
+          html: SSR.render('template_to_client', data),
+        })
+
       })
 
   }

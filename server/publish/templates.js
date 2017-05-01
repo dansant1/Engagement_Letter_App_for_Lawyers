@@ -17,3 +17,13 @@ Meteor.publish('Exclusion_Templates', function () {
     return;
   }
 })
+
+Meteor.publish('Payment_Templates', function () {
+  if (this.userId) {
+    let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
+    return PaymentTemplates.find({firmId})
+  } else {
+    this.stop()
+    return;
+  }
+})

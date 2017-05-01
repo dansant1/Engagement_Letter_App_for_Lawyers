@@ -30,5 +30,21 @@ Meteor.methods({
         return;
     }
 
+  },
+  add_payment_template(content, name) {
+    if (this.userId) {
+
+      let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
+
+      PaymentTemplates.insert({
+        content: content,
+        name: name,
+        firmId: firmId
+      })
+
+    } else {
+        return;
+    }
+
   }
 })

@@ -30,19 +30,30 @@
       <hr>
       <br>
       <a href="/home" class="btn btn-white" style="width: 40%" name="save">Save as Draft</a>
-      <button class="btn btn-white signup" style="width: 40%" name="next">Next</button>
+      <button class="btn btn-white signup" style="width: 40%; margin-bottom: 40px" name="next">Send to Client</button>
 
     </div>
 
     <div class="col-md-6">
-      
+
         <br>
         <br>
         <br>
         <textarea name="deferral" class="input_material area" rows="8" cols="80" placeholder="Describe the Payment Scope">
           {{deferral}}
         </textarea>
-     
+        <br><br>
+        <label for="engagement_template" class="teal">Template Text</label>
+        <br>
+        <select class="input_material auth" id="engagement_template" name="engagement_template" style="width: 40%;
+      margin: 20px auto;">
+          <option value="0">--Choose Template--</option>
+          {{#each templates}}
+          <option value="{{this.content}}">{{this.name}}</option>
+          {{/each}}
+          <option value="n">--Add Template--</option>
+        </select>
+
     </div>
 
     </div>
