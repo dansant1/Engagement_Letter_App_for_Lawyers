@@ -217,7 +217,7 @@ Template.Lawyer_Rates.events({
 
       } else if (t.texto.get() === "Project Estimate") {
           array.push({
-            lawyer: 'Dan Delgado',
+            lawyer: $('#lawyer_assigned option:selected').text(),
             type: "Project",
             price: price
           })
@@ -226,7 +226,7 @@ Template.Lawyer_Rates.events({
 
       } else if (t.texto.get() === "Montly Retainer") {
         array.push({
-          lawyer: 'Dan Delgado',
+          lawyer: $('#lawyer_assigned option:selected').text(),
           type: "Retainer",
           price: price
         })
@@ -245,7 +245,7 @@ Template.Lawyer_Rates.events({
       t.find('[name="project_estimate"]').value = ""
 
     } else {
-      Bert.alert('Compelete the data', 'warning')
+      Bert.alert('Complete the data', 'warning')
     }
 
 
@@ -255,7 +255,7 @@ Template.Lawyer_Rates.events({
         deferral = null
       }
 
-      Meteor.call('paymentEngagementLetter', t.payment.get(), t.total.get(), t.hourly.get(), deposit_amount, deferral, letterId, (err) => {
+      Meteor.call('paymentEngagementLetter', t.payment.get(), t.total.get(), t.hourly.get(), deposit_amount, deferral, letterId, t.secondTotal.get(), (err) => {
         if (err) {
           Bert.alert(err, 'danger')
         } else {

@@ -17,3 +17,24 @@ Meteor.publish('lawyers', function () {
     return;
   }
 })
+
+Meteor.publish('usuarios', function () {
+  if (this.userId) {
+    return Meteor.users.find()
+  } else {
+    this.stop();
+    return;
+  }
+})
+
+Meteor.publish('user', function () {
+  if (this.userId) {
+    return Meteor.users.find({_id: this.userId}, {fields: {
+      'profile': 1
+    }})
+  } else {
+    this.stop();
+    return;
+  }
+})
+

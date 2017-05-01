@@ -45,7 +45,7 @@ Meteor.methods({
       return
     }
   },
-  paymentEngagementLetter(payment, total, hourly, deposit, deferral, _id) {
+  paymentEngagementLetter(payment, total, hourly, deposit, deferral, _id, secondTotal) {
     if (this.userId) {
       Letters.update({_id}, {
         $set: {
@@ -53,7 +53,8 @@ Meteor.methods({
           total,
           deposit,
           deferral,
-          hourly
+          hourly,
+          secondTotal
         }
       })
     } else {

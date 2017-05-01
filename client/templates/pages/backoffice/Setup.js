@@ -59,7 +59,7 @@ Template.Setup.events({
         }
       })
     } else {
-        Bert.alert('Complete th email', 'warning', 'growl-top-right' );
+        Bert.alert('Complete the email', 'warning', 'growl-top-right' );
     }
   }
 })
