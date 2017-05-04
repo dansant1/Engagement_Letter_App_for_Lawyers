@@ -19,11 +19,6 @@ Meteor.methods({
 
 Meteor.methods({
   'chargeCard': function(charge) {
-
-    /*let handleCharge = Meteor.wrapAsync( Stripe.charges.create, Stripe.charges ),
-        payment      = handleCharge( charge );
-
-    return payment;*/
     Stripe.charges.create(charge, function(err, charge) {
       console.log(err, charge);
     });

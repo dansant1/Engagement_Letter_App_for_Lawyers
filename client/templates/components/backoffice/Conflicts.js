@@ -25,6 +25,15 @@ Template.Conflicts.helpers({
 })
 
 Template.Conflicts.events({
+  'click .remove'(e, t) {
+    Meteor.call('removeParty', this._id, (err) => {
+      if (!err) {
+        Bert.alert('Party Removed', 'success')
+      } else {
+        Bert.alert(err, 'danger') 
+      }
+    })
+  },
   'click [name="add_party"]'(e, t) {
     let name = t.find('[name="partyname"]').value
     let letterId = FlowRouter.getParam('letterId')

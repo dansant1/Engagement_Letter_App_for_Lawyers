@@ -121,15 +121,9 @@ Template.Write_Letter.events({
     if ($('[name="engagement_type"]').val() === "0") {
       Bert.alert('Choose a Type', 'warning')
       return;
+
     } else{
       engagement_type = $('[name="engagement_type"]').val()
-    }
-
-    if ($('[name="engagement_client"]').val() === "0") {
-      Bert.alert('Choose a Client', 'warning')
-      return;
-    } else {
-      engagement_client = $('[name="engagement_client"]').val()
     }
 
     if ($('[name="engagement"]').val() === "0") {
@@ -139,27 +133,78 @@ Template.Write_Letter.events({
       engagement = $('[name="engagement"]').val()
     }
 
-    if (!FlowRouter.getParam('letterId')) {
-      console.log('new')
-      Meteor.call('createEngagementLetter1', engagement_type, engagement_client, engagement, (err, result) => {
-        if (err) {
-          Bert.alert(err, 'danger')
-        } else {
-          FlowRouter.go('/new_letter/step_3/' + result)
+    if ($('[name="engagement_client"]').val() === "0") {
+      let data = {
+        company_name: t.find('[name="name"]').value,
+        company_address: t.find('[name="address"]').value,
+        company_phone: t.find('[name="phone"]').value,
+        company_client_name: t.find('[name="client_name"]').value,
+        company_client_email: t.find('[name="client_email"]').value,
+      }
+
+      if (data.company_name !== "" && data.company_address !== "" && data.company_phone !== "" && data.company_client_name !== "" && data.company_client_email !== "") {
+
+        if (!validateEmail(data.company_client_email)) {
+          Bert.alert('Write a correct email', 'warning')
+          return
         }
-      })
+
+        Meteor.call('add_client', data,  (err, result) => {
+          if (err) {
+            t.find('[name="name"]').value = ""
+            t.find('[name="address"]').value = ""
+            t.find('[name="phone"]').value = ""
+            t.find('[name="client_name"]').value = ""
+            t.find('[name="client_email"]').value = ""
+            Bert.alert( err, 'danger', 'growl-top-right' );
+            return
+          } else {
+            t.find('[name="name"]').value = ""
+            t.find('[name="address"]').value = ""
+            t.find('[name="phone"]').value = ""
+            t.find('[name="client_name"]').value = ""
+            t.find('[name="client_email"]').value = ""
+           
+            engagement_client = result 
+
+            Meteor.call('createEngagementLetter1', engagement_type, engagement_client, engagement, (err, result) => {
+              if (err) {
+                Bert.alert(err, 'danger')
+              } else {
+                FlowRouter.go('/new_letter/step_3/' + result)
+              }
+            })
+          }
+        })
+
+      } else {
+        Bert.alert( 'Complete the Details of the Client', 'warning', 'growl-top-right' );
+        return
+      }
     } else {
+      engagement_client = $('[name="engagement_client"]').val()
 
-      Meteor.call('editEngagementLetter1', FlowRouter.getParam('letterId'),  engagement_type, engagement_client, engagement, (err, result) => {
-        if (err) {
-          Bert.alert(err, 'danger')
-        } else {
-          FlowRouter.go('/new_letter/step_3/' + FlowRouter.getParam('letterId'))
-        }
-      })
+       if (!FlowRouter.getParam('letterId')) {
+     
+        Meteor.call('createEngagementLetter1', engagement_type, engagement_client, engagement, (err, result) => {
+          if (err) {
+            Bert.alert(err, 'danger')
+          } else {
+            FlowRouter.go('/new_letter/step_3/' + result)
+          }
+        })
+        
+      } else {
 
+        Meteor.call('editEngagementLetter1', FlowRouter.getParam('letterId'),  engagement_type, engagement_client, engagement, (err, result) => {
+          if (err) {
+            Bert.alert(err, 'danger')
+          } else {
+            FlowRouter.go('/new_letter/step_3/' + FlowRouter.getParam('letterId'))
+          }
+        })
+
+      }
     }
-
-
   }
 })

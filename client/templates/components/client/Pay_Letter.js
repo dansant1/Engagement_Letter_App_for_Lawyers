@@ -1,8 +1,6 @@
 Template.Pay_Letter.onCreated( () => {
 	let template = Template.instance()
 
-	console.log(Meteor.settings.public.stripe)
-
 	template.checkout = StripeCheckout.configure({
 	    key: Meteor.settings.public.stripe,
 	    token( token ) {
@@ -33,7 +31,7 @@ Template.Pay_Letter.events({
 		let cvc = t.find('[name="vcc"]').value
 		let expMo = $('[name="expMo"]').val()
 		let expYr = $('[name="expYr"]').val()
-		let price = Letters.findOne().payment[0].price
+		let price = Letters.findOne().deposit
 		let stripeToken
 
 		let $button = $(e.target)
@@ -132,12 +130,6 @@ Template.Pay_Letter.events({
 				return
 			}
 		}
-
-		
-
-		
-
-		
 	
 	}
 })
@@ -145,22 +137,6 @@ Template.Pay_Letter.events({
 Template.Pay_Letter.helpers({
 	letter() {
 		return Letters.findOne()
-	},
-	type() {
-		switch (this.payment[0].type) {
-			case 'Hourly':
-				return 'Rate'
-			break;
-			case 'Project':
-				return 'Project Estimate'
-			break;
-			case 'Retainer':
-				return 'Montly Fee'
-			break;
-		}
-	},
-	price() {
-		return Letters.findOne().payment[0].price
 	},
 	letterId() {
 		return Template.instance().letterId

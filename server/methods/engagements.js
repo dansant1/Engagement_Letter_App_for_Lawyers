@@ -5,10 +5,11 @@ Meteor.methods({
   createEngagementLetter1(engagement_type, engagement_client, engagement, clientId) {
     if (this.userId) {
       let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
+      let draft = true
       let createdAt = new Date()
       let createdBy = this.userId
       let engagementId = Letters.insert({
-        engagement_type, engagement_client, engagement, firmId, createdBy, createdAt
+        engagement_type, engagement_client, engagement, firmId, createdBy, createdAt, draft
       })
 
       return engagementId
@@ -45,20 +46,27 @@ Meteor.methods({
       return
     }
   },
-  paymentEngagementLetter(payment, total, hourly, deposit, deferral, _id, secondTotal) {
+  paymentEngagementLetter(type, recurring, deposit, deferral, _id) {
     if (this.userId) {
+
+      if (type === "1") {
+        type = "Hourly Rate"
+      } else if (type === "2") {
+        type = "Retainer"
+      } else if (type === "3") {
+        type = "Project"
+      }
+
       Letters.update({_id}, {
         $set: {
-          payment,
-          total,
           deposit,
           deferral,
-          hourly,
-          secondTotal
+          type,
+          recurring
         }
       })
     } else {
-      return;
+      return
     }
   },
   getFirmName(_id) {
@@ -78,7 +86,8 @@ Meteor.methods({
 
       Letters.update({_id}, {
         $set: {
-          status: 'draft'
+          status: 'draft',
+          draft: false
         }
       })
 
@@ -100,7 +109,8 @@ Meteor.methods({
       Letters.update({_id}, {
         $set: {
           status: 'pending_payment',
-          sendedAt: new Date()
+          sendedAt: new Date(),
+          draft: false
         }
       })
 
@@ -199,5 +209,8 @@ Meteor.methods({
 
       })
 
+  },
+  removeParty(_id) {
+    Parties.remove({_id})
   }
 })

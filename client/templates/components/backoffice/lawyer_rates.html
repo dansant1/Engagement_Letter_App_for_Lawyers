@@ -10,23 +10,10 @@
         <option value="3">Project</option>
       </select>
 
-      <div class="laws">
-        {{#if isHourly}}
-        <select style="border-radius: 0px" class="input_material auth" id="lawyer_assigned" name="lawyers">
-          {{#each lawyers}}
-          <option value="{{this._id}}">{{this.profile.first_name}} {{this.profile.last_name}}</option>
-          {{/each}}
-        </select>
-        {{/if}}
-      </div>
-
-      <input type="number" name="amount" placeholder="{{text}}" class="input_material auth">
-      <input type="number" name="discount" placeholder="Discount %" class="input_material auth">
-      <hr>
-      <input type="number" name="project_estimate" value="{{estimate}}" disabled placeholder="Project Estimate" class="input_material auth">
       <input type="number" name="deposit_amount" placeholder="Deposit Amount" class="input_material auth">
       <br><br>
-      <input type="checkbox" name="recurring" id="recurring" style="display: inline-block; margin-right: 10px"><label class="steel" for="recurring"> Recurring Payment</label>
+      <input type="checkbox" name="recurring" id="recurring" style="display: inline-block; margin-right: 10px">
+      <label class="steel" for="recurring"> Recurring Payment</label>
       <hr>
       <br>
       <a href="/home" class="btn btn-white" style="width: 40%" name="save">Save as Draft</a>

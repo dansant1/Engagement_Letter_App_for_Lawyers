@@ -48,3 +48,16 @@ Template.View_Letter.helpers({
 		}
 	}
 })
+
+Template.View_Letter.events({
+	'click [name="send"]'(e, t) {
+		let letterId = FlowRouter.getParam('letterId')
+		Meteor.call('sendLetterToClient', letterId, (err) => {
+			if (!err) {
+				Bert.alert('Letter Sended', 'success')
+			} else {
+				Bert.alert(err, 'danger')
+			}
+		})
+	}
+})

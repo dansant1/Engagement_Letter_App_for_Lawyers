@@ -4,7 +4,7 @@ Meteor.methods({
 
       let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
 
-      Clients.insert({
+      let id = Clients.insert({
         company_name: data.company_name,
         company_address: data.company_address,
         company_phone: data.company_phone,
@@ -12,6 +12,8 @@ Meteor.methods({
         company_client_email: data.company_client_email,
         firmId: firmId
       })
+
+      return id
 
     } else {
         return;

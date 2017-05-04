@@ -1,7 +1,8 @@
 Meteor.publish('Letters', function () {
   if (this.userId) {
     let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
-    return Letters.find({firmId})
+    let draft = false
+    return Letters.find({firmId, draft})
   } else {
     this.stop()
     return;
