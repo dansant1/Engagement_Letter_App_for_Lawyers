@@ -3,19 +3,29 @@
   <div class="row">
     <div class="col-md-5">
       <h4 class="teal">Step 1 - Client Information</h4>
-      <select class="input_material auth" name="engagement_client">
+      {{#if edit}}
+      {{else}}
+       <select class="input_material auth" name="engagement_client">
         <option value="0">-- Choose a Client --</option>
         {{#each clients}}
         <option value="{{this._id}}">{{this.company_name}}</option>
         {{/each}}
       </select>
-      <h4 class="teal">- or Add a New Client-</h4>
+       <h4 class="teal">- or Add a New Client-</h4>
+      {{/if}}
+      {{#with client}}
+      <input type="text" value="{{this.company_name}}" name="name" placeholder="Company Name" class="input_material auth">
+      <input type="text" value="{{this.company_address}}" name="address" placeholder="Company Address" class="input_material auth">
+      <input type="number" value="{{this.company_phone}}" name="phone" placeholder="Company Phone" class="input_material auth">
+      <input type="text" value="{{this.company_client_name}}" name="client_name" placeholder="Contact Name" class="input_material auth">
+      <input type="email" value="{{this.company_client_email}}" name="client_email" placeholder="Client Email" class="input_material auth">
+      {{else}}
       <input type="text" name="name" placeholder="Company Name" class="input_material auth">
-      <input type="text" name="address" placeholder="Company Address" class="input_material auth">
+      <input type="text"  name="address" placeholder="Company Address" class="input_material auth">
       <input type="number" name="phone" placeholder="Company Phone" class="input_material auth">
       <input type="text" name="client_name" placeholder="Contact Name" class="input_material auth">
       <input type="email" name="client_email" placeholder="Client Email" class="input_material auth">
-      
+      {{/with}}
     </div>
 
     <div class="col-md-7">
@@ -25,9 +35,10 @@
         <br>
         <select class="input_material auth" id="engagement_type" name="engagement_type" style="width: 80%;
       margin: 20px auto;">
-          <option value="0">--Choose Type--</option>
-          <option value="1">Susan</option>
-          <option value="2">Joe</option>
+         <option value="0">--Choose Type--</option>
+          {{#each engagement_types}}
+            <option value="{{this._id}}">{{this.name}}</option>
+          {{/each}}
         </select>
       </div>
       <br>
@@ -39,6 +50,9 @@
     margin: 20px auto;">
         <option value="?">--Choose Template--</option>
         {{#each templates}}
+        <option value="{{this.content}}">{{this.name}}</option>
+        {{/each}}
+        {{#each defaultTemplates}}
         <option value="{{this.content}}">{{this.name}}</option>
         {{/each}}
         <option value="n">--Add Template--</option>

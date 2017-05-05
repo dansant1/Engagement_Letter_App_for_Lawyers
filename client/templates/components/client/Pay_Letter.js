@@ -69,7 +69,7 @@ Template.Pay_Letter.events({
 				      			receipt_email: 'danieldelgadilloh@gmail.com'
 							}	
 
-							Meteor.call('chargeCard', charge, (err) => {
+							Meteor.call('chargeCard', charge, FlowRouter.getParam('letterId'), (err) => {
 								if (!err) {
 									Bert.alert('Next', 'success')
 									$button.prop('disabled', false)

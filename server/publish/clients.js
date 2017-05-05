@@ -8,6 +8,15 @@ Meteor.publish('Clients', function () {
   }
 })
 
+Meteor.publish('clients', function () {
+  if (this.userId) {
+    return Clients.find({});
+  } else {
+    this.stop()
+    return;
+  }
+})
+
 Meteor.publish('lawyers', function () {
   if (this.userId) {
     let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId
@@ -21,6 +30,15 @@ Meteor.publish('lawyers', function () {
 Meteor.publish('usuarios', function () {
   if (this.userId) {
     return Meteor.users.find()
+  } else {
+    this.stop();
+    return;
+  }
+})
+
+Meteor.publish('firms', function () {
+  if (this.userId) {
+    return Firms.find()
   } else {
     this.stop();
     return;

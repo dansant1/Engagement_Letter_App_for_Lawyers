@@ -6,7 +6,12 @@ Template.Write_Letter.onCreated( () => {
   template.autorun( () => {
     template.subscribe('Clients')
     template.subscribe('Templates')
+    template.subscribe('Engagement_Types')
+    template.subscribe('defaultTemplates')
 
+    if (FlowRouter.getParam('letterId')) {
+      template.subscribe('Clients')
+    }
   })
 
 })
@@ -23,6 +28,26 @@ Template.Write_Letter.helpers({
       return Letters.findOne().engagement
     } else {
       return ''
+    }
+  },
+  edit() {
+    if (FlowRouter.getParam('letterId')) {
+      return true
+    } else {
+      return false
+    }
+  },
+  engagement_types() {
+    return Engagement_types.find()
+  },
+  defaultTemplates() {
+    return Default_Templates.find()
+  },
+  client() {
+    if (FlowRouter.getParam('letterId')) {
+      return Clients.findOne({_id: Letters.findOne().engagement_client})
+    } else {
+      return 
     }
   }
 })
@@ -117,14 +142,8 @@ Template.Write_Letter.events({
     let engagement_type;
     let engagement_client;
     let engagement;
-
-    if ($('[name="engagement_type"]').val() === "0") {
-      Bert.alert('Choose a Type', 'warning')
-      return;
-
-    } else{
-      engagement_type = $('[name="engagement_type"]').val()
-    }
+    engagement_type = "1"
+   
 
     if ($('[name="engagement"]').val() === "0") {
       Bert.alert('Write a Engagement', 'warning')
@@ -134,6 +153,8 @@ Template.Write_Letter.events({
     }
 
     if ($('[name="engagement_client"]').val() === "0") {
+
+      console.log('hollalalall')
       let data = {
         company_name: t.find('[name="name"]').value,
         company_address: t.find('[name="address"]').value,
@@ -196,13 +217,41 @@ Template.Write_Letter.events({
         
       } else {
 
-        Meteor.call('editEngagementLetter1', FlowRouter.getParam('letterId'),  engagement_type, engagement_client, engagement, (err, result) => {
-          if (err) {
-            Bert.alert(err, 'danger')
-          } else {
-            FlowRouter.go('/new_letter/step_3/' + FlowRouter.getParam('letterId'))
+        let data = {
+          company_name: t.find('[name="name"]').value,
+          company_address: t.find('[name="address"]').value,
+          company_phone: t.find('[name="phone"]').value,
+          company_client_name: t.find('[name="client_name"]').value,
+          company_client_email: t.find('[name="client_email"]').value,
+        }
+
+        
+        engagement_client = Letters.findOne({_id: FlowRouter.getParam('letterId')}).engagement_client
+
+        if (data.company_name !== "" && data.company_address !== "" && data.company_phone !== "" && data.company_client_name !== "" && data.company_client_email !== "") {
+
+          if (!validateEmail(data.company_client_email)) {
+            Bert.alert('Write a correct email', 'warning')
+            return
           }
-        })
+
+          Meteor.call('client_update', data, engagement_client, (err) => {
+            if (!err) {
+              Meteor.call('editEngagementLetter1', FlowRouter.getParam('letterId'),  engagement_type, engagement_client, engagement, (err, result) => {
+                if (err) {
+                  Bert.alert(err, 'danger')
+                } else {
+                  FlowRouter.go('/new_letter/step_3/' + FlowRouter.getParam('letterId'))
+                }
+              })
+            } else {
+              Bert.alert(err, 'danger')
+            }
+          })
+
+        }
+
+        
 
       }
     }

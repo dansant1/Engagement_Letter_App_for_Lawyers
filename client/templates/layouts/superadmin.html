@@ -1,0 +1,193 @@
+<template name="AdminLayout">
+	{{#if currentUser}}
+		{{#if  isInRole 'admin'}}
+  			{{>Template.dynamic template=page}}
+		{{/if}}
+	{{else}}
+		{{>Auth}}
+	{{/if}}
+</template>
+
+<template name="AdminHome">
+	{{>AdminMenu}}
+	<br><br>
+	<div class="container">
+		<div class="col-md-4">
+			<h4>Add Users</h4>
+			<input type="text" name="firm_name" placeholder="Firm Name" class="input_material auth">
+		    <input type="text" name="first_name" placeholder="First Name" class="input_material auth">
+		    <input type="text" name="last_name" placeholder="Last Name" class="input_material auth">
+		    <input type="number" name="phone_number" placeholder="Phone" class="input_material auth">
+		    <input type="email" name="email" placeholder="Email" class="input_material auth">
+		    <input type="password" name="password" placeholder="Password" class="input_material auth">
+		    <input type="button" style="width: 145px" value="Add User" name="signup" class="btn btn-white signup">
+		</div>
+		
+		<div class="col-md-4">
+			<h4>Add Default Templates</h4>
+			<input type="text" name="template_name" placeholder="Template Name" class="input_material auth">
+			<textarea name="template_content" class="input_material area" style="margin: 20px 0px; display: block" rows="8" cols="80" placeholder="Describe The Template Content"></textarea>
+			<input type="button" style="width: 145px" value="Add Template" name="add_engagement_template" class="btn btn-white signup">
+		</div>
+
+		<div class="col-md-4">
+			<h4>Add Engagement Types</h4>
+			<input type="text" name="engagement_type_name" placeholder="Engagement Type Name" class="input_material auth">
+			<input type="button" style="width: 145px" value="Add Type" name="add_engagement_type" class="btn btn-white signup">
+			<br>
+			<ul class="list-group">
+                {{#each engagement_types}}
+                <li class="list-group-item clearfix">
+                   <span class="pull-left">{{this.name}}</span> <span class="pull-right remove_engagement_type"><i class="fa fa-trash" aria-hidden="true"></i></span>
+                </li>
+                {{/each}}
+
+            </ul>
+		</div>
+	</div>
+	<br>
+	<div class="container">
+		<div class="col-md-10">
+			<h2>List of Users</h2>
+			<table class="table">
+			    <thead>
+			    	<tr>
+				        <th>Firm Name</th>
+				        <th>First Name</th>
+				        <th>Last Name</th>
+				        <th>Phone</th>
+				        <th>Email</th>
+				        <th>Edit</th>
+				        <th>Remove</th>
+			      	</tr>
+			    </thead>
+			    <tbody>
+			      	{{#each users}}
+			      	<tr>
+				        <td>{{firmName}}</td>
+				        <td>{{this.profile.first_name}}</td>
+				        <td>{{this.profile.last_name}}</td>
+				        <td>{{this.profile.phone_number}}</td>
+				        <td>{{email}}</td>
+				        <td><i class="fa fa-pencil" aria-hidden="true"></i></td>
+				        <td><i id="remove_user" class="fa fa-trash" aria-hidden="true"></i></td>
+			      	</tr>
+			    	{{/each}}
+			    </tbody>
+  			</table>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-md-6">
+			<h2>List of Default Templates</h2>
+			<table class="table">
+			    <thead>
+			    	<tr>
+				        <th>Name</th>
+				        <th>Content</th>
+				        <th>Edit</th>
+				        <th>Remove</th>
+			      	</tr>
+			    </thead>
+			    <tbody>
+			      	{{#each default_templates}}
+			      	<tr>
+				        <td>{{this.name}}</td>
+				        <td>{{this.content}}</td>
+				        <td><i class="fa fa-pencil" aria-hidden="true"></i></td>
+				        <td><i id="remove_template" class="fa fa-trash" aria-hidden="true"></i></td>
+			      	</tr>
+			    	{{/each}}
+			    </tbody>
+  			</table>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-md-6">
+			<h2>List of Firms</h2>
+			<table class="table">
+			    <thead>
+			    	<tr>
+				        <th>Name</th>
+				        <th>Edit</th>
+				        
+			      	</tr>
+			    </thead>
+			    <tbody>
+			      	{{#each firms}}
+			      	<tr>
+				        <td>{{this.name}}</td>
+				        <td><i class="fa fa-pencil" aria-hidden="true"></i></td>
+				        
+			      	</tr>
+			    	{{/each}}
+			    </tbody>
+  			</table>
+		</div>
+	</div>
+</template>
+
+<template name="AdminMenu">
+	<nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/home">Engagement Letter Co</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/admin/home">Data</a></li>
+            <li><a href="/admin/payments">Payments</a></li>
+            
+          </ul>
+          <ul class="nav navbar-nav navbar-right">         
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
+              <ul class="dropdown-menu dropdown__acount">
+                {{>Logout}}
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</template>
+
+<template name="AdminPayments">
+	{{>AdminMenu}}
+	<br>
+	<div class="container">
+		
+		<div class="col-md-6">
+
+			<h2>List of Payments</h2>
+			<table class="table">
+			    <thead>
+			    	<tr>
+				        <th>Firm</th>
+				        <th>Client</th>
+				        <th>Date</th>
+				        <th>Amount</th>
+				        <th>Lawyer</th>
+			      	</tr>
+			    </thead>
+			    <tbody>
+			      	{{#each payments}}
+			      	<tr>
+				        <td>{{firm}}</td>
+				        <td>{{client}}</td>
+				        <td>{{date}}</td>
+				        <td>$ {{amount}}</td>
+				        <td>{{lawyer}}</td>
+			      	</tr>
+			    	{{/each}}
+			    </tbody>
+  			</table>
+		</div>
+	</div>
+</template>

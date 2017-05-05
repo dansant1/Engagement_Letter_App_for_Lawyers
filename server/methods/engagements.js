@@ -212,5 +212,60 @@ Meteor.methods({
   },
   removeParty(_id) {
     Parties.remove({_id})
+  },
+  add_engagement_type(name) {
+    if (this.userId) {
+      Engagement_types.insert({name})
+    } else {
+      return
+    }
+  },
+  remove_engagement_type(_id) {
+    if (this.userId) {
+      Engagement_types.remove({_id})
+    } else {
+      return
+    }
+  },
+  remove_letter(_id) {
+
+    Letters.remove({_id})
+  },
+  client_update(data, _id) {
+    Clients.update({_id}, {
+      $set: {
+        company_name: data.company_name,
+        company_address: data.company_address,
+        company_phone: data.company_phone,
+        company_client_name: data.company_client_name,
+        company_client_email: data.company_client_email
+      }
+    })
+  },
+  add_defult_template(content, name) {
+     
+     Default_Templates.insert({
+      content, name
+     })
+  },
+  remove_default_template(_id) {
+    Default_Templates.remove({_id})
+  },
+  remove_user(_id) {
+    Meteor.users.remove({_id})
+  },
+  saveAsPendingPayment(_id) {
+    Letters.update({_id}, {
+      $set: {
+        status: 'pending_payment'
+      }
+    })
+  },
+  saveAsPendingSignature(_id) {
+    Letters.update({_id}, {
+      $set: {
+        status: 'pending_signature'
+      }
+    })
   }
 })

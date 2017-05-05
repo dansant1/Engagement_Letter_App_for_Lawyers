@@ -47,6 +47,24 @@ Template.Lawyer_Rates.helpers({
     } else {
       return ''
     }
+  },
+  deposit() {
+    if (FlowRouter.getParam('letterId')) {
+      return Letters.findOne().deposit ? Letters.findOne().deposit : '' 
+    } else {
+      return ''
+    }
+  },
+  checked() {
+    if (FlowRouter.getParam('letterId')) {
+      if (Letters.findOne().recurring) {
+        return 'checked'
+      }  else {
+        return ''
+      }
+    } else {
+      return ''
+    }
   }
 })
 

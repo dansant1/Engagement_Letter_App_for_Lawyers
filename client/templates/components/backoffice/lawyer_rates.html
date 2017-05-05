@@ -10,9 +10,10 @@
         <option value="3">Project</option>
       </select>
 
-      <input type="number" name="deposit_amount" placeholder="Deposit Amount" class="input_material auth">
+      <input type="number" value={{deposit}} name="deposit_amount" placeholder="Deposit Amount" class="input_material auth">
       <br><br>
-      <input type="checkbox" name="recurring" id="recurring" style="display: inline-block; margin-right: 10px">
+
+      <input type="checkbox" {{checked}} name="recurring" id="recurring" style="display: inline-block; margin-right: 10px">
       <label class="steel" for="recurring"> Recurring Payment</label>
       <hr>
       <br>

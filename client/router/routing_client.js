@@ -275,3 +275,27 @@ FlowRouter.route('/mobile/view_letter', {
     BlazeLayout.render('Mobile_Layout', { page: 'mobile_view_letter'})
   }
 })
+
+FlowRouter.route('/admin/super', {
+  name: 'Login Admin',
+  action() {
+    BlazeLayout.render('Auth', { step: 'LoginAdmin' })
+  }
+})
+
+FlowRouter.route('/admin/home', {
+  name: 'Super Admin',
+  action() {
+    BlazeLayout.render('AdminLayout', { page: 'AdminHome' })
+  }
+})
+
+FlowRouter.route('/admin/payments', {
+  name: 'Admin Payments',
+  action() {
+    BlazeLayout.render('AdminLayout', { page: 'AdminPayments' })
+  }
+})
+
+
+

@@ -9,6 +9,17 @@ Meteor.publish('Letters', function () {
   }
 })
 
+Meteor.publish('letters', function () {
+  if (this.userId) {
+    
+    return Letters.find({})
+  } else {
+    this.stop()
+    return;
+  }
+})
+
+
 Meteor.publish('LettersEstatus', function () {
   if (this.userId) {
     let firmId =  Meteor.users.findOne({_id: this.userId}).profile.firmId

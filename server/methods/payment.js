@@ -18,10 +18,26 @@ Meteor.methods({
 });
 
 Meteor.methods({
-  'chargeCard': function(charge) {
+  'chargeCard': function(charge, _id) {
+    
     Stripe.charges.create(charge, function(err, charge) {
       console.log(err, charge);
     });
+
+    Letters.update({_id}, {
+      $set: {
+        status: 'pending_signature'
+      }
+    })
+
+    let letterId = _id
+    let firmId = Letters.findOne({_id}).firmId
+    let createdAt = new Date()
+    Payments.insert({
+      firmId,
+      letterId,
+      createdAt
+    })
 
   }
 });

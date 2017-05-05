@@ -1,17 +1,7 @@
 <template name="letters">
   <div class="row_title">
     <h3>Letters</h3>
-    <ul class="nav_material">
-      <li class="drop"><i class="fa fa-filter" aria-hidden="true"></i> Filter by
-        <ul>
-          <li><a href="#">Client</a></li>
-          <li><a href="#">Case</a></li>
-          <li><a href="#">Status</a></li>
-          <li><a href="#">Date</a></li>
-        </ul>
-      </li>
-    </ul>
-    <input type="text" name="search" placeholder="Search..." class="input_material">
+    
   </div>
   <div class="container-flex">
     <div class="letter">
@@ -22,9 +12,10 @@
     </div>
     {{#each letters}}
     <div class="letter">
-      <p>{{client_name}} </p><p>{{lawyer}}</p>
+      <p style="position: relative; top: 10px; left: 195px; z-index: 1001; width: 15px; height: 15px;"><i id="remove_letter" class="fa fa-trash" aria-hidden="true"></i></p>
+      <p style="margin: 5px auto">{{client_name}} </p> <p style="margin: 5px auto"> {{lawyer}}</p>
       <br>
-      <p>
+      <p style="margin: 5px auto">
         <a href="/view_letter/{{this._id}}" class="button"><i class="fa fa-eye" aria-hidden="true"></i></a>
         <a href="/edit_letter/{{this._id}}" class="button"><i class="fa fa-pencil" aria-hidden="true"></i></a>
       </p>

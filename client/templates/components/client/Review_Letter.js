@@ -4,6 +4,48 @@ Template.Review_Letter.helpers({
 	}
 })
 
+Template.Review_Letter.events({
+	'click [name="next"]'(e, t) {
+		console.log(Letters.findOne().deposit)
+		if (Letters.findOne().deposit === undefined || Letters.findOne().deposit === "" || Letters.findOne().deposit === null) {
+			
+			if (Letters.findOne().status === "completing") {
+				FlowRouter.go('/thanks')
+			} else {
+				Meteor.call('saveAsPendingSignature', FlowRouter.getParam('letterId'), (err) => {
+					if (!err) {
+						FlowRouter.go('/client/sign_letter/' + FlowRouter.getParam('letterId'))		
+					} else {
+						alert(err)
+					}
+				})	
+			}
+
+			
+			
+		} else {
+
+			if (Letters.findOne().status === "completing") {
+				FlowRouter.go('/thanks')
+			} else {
+				Meteor.call('saveAsPendingPayment', FlowRouter.getParam('letterId'), (err) => {
+					if (!err) {
+						FlowRouter.go('/client/payment_letter/' + FlowRouter.getParam('letterId'))
+					} else {
+						alert(err)
+					}
+				})
+			}
+
+			
+
+			
+
+		}
+
+	}
+})
+
 Template.frameLetter.onCreated( () => {
 	let template = Template.instance()
 
