@@ -267,5 +267,40 @@ Meteor.methods({
         status: 'pending_signature'
       }
     })
-  }
+  },
+  edit_firm(name, _id) {
+
+    Firms.update({_id}, {
+      $set: {
+        name: name
+      }
+    })
+
+  },
+  edit_default_template(name, content, _id) {
+    Default_Templates.update({_id}, {
+      $set: {
+        name: name,
+        content: content
+      }
+    })
+  },
+  edit_user(first_name, last_name, phone_number , _id) {
+    Meteor.users.update({_id}, {
+      $set: {
+        'profile.first_name': first_name,
+        'profile.last_name': last_name,
+        'profile.phone_number': phone_number
+      }
+    })
+  },
+  edit_engagement_types(name, _id) {
+    
+    Engagement_types.update({_id}, {
+      $set: {
+        name: name
+      }
+    })
+
+  },
 })

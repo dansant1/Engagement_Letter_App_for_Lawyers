@@ -154,7 +154,7 @@ Template.Write_Letter.events({
 
     if ($('[name="engagement_client"]').val() === "0") {
 
-      console.log('hollalalall')
+      
       let data = {
         company_name: t.find('[name="name"]').value,
         company_address: t.find('[name="address"]').value,

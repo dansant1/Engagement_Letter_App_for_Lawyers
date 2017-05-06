@@ -101,6 +101,80 @@ Template.AdminHome.events({
 				Bert.alert(err, 'danger')
 			}
 		})	
+	},
+	'click #edit__firm'(e, t) {
+		let name = $("#firm__" + this._id).val()
+
+		if (name !== "") {
+			Meteor.call('edit_firm', name, this._id, (err) => {
+				if (!err) {
+					Bert.alert('Firm Edited', 'success')
+				} else {
+					Bert.alert(err, 'danger')
+				}
+			})	
+		} else {
+			Bert.alert('Complete the Data', 'warning')
+		}
+		
+	},
+	'click #edit__default_template'(e, t) {
+		let name = $("#default_template__name__" + this._id).val()
+		let content = $("#default_template__content__" + this._id).val()
+
+		if (name !== "" && content !== "") {
+			Meteor.call('edit_default_template', name, content, this._id, (err) => {
+				if (!err) {
+					if (!err) {
+						Bert.alert('Default Template Edited', 'success')
+					} else {
+						Bert.alert(err, 'danger')
+					}	
+				}
+			})
+		} else {
+			Bert.alert('Complete the Data', 'warning')
+
+		}
+	},
+	'click #edit__user'(e, t) {
+		let first_name = $("#first_name_" + this._id).val()
+		let last_name = $("#last_name_" + this._id).val()
+		let phone_number = $("#phone_number_" + this._id).val()
+
+		if (first_name !== "" && last_name !== "" && phone_number !== "") {
+			Meteor.call('edit_user', first_name, last_name, phone_number ,this._id, (err) => {
+				if (!err) {
+					if (!err) {
+						Bert.alert('User Edited', 'success')
+					} else {
+						Bert.alert(err, 'danger')
+					}	
+				}
+			})
+		} else {
+			Bert.alert('Complete the Data', 'warning')
+		}
+	},
+	'click #edit__type'(e, t) {
+
+		let name = $("#name__" + this._id).val()
+
+		if (name !== "") {
+			Meteor.call('edit_engagement_types', name, this._id, (err) => {
+				if (!err) {
+						if (!err) {
+							Bert.alert('User Edited', 'success')
+						} else {
+							Bert.alert(err, 'danger')
+						}	
+				}
+			})	
+		} else {
+			Bert.alert('Complete the Data', 'warning')
+		}
+
+		
 	}
 })
 
